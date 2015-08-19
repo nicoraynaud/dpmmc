@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+<!-- The contents of this file will be loaded for each web application -->
+<Context reloadable="true" cookies="true">
+
+	<!--  -->
+	<!-- DATASOURCES -->
+	<!--  -->	
+	<Resource name="jdbc/DPMMC_DS1" auth="Container" type="javax.sql.DataSource"
+		maxActive="100" maxIdle="30" minIdle="0" validationQuery="select 1"
+		maxWait="10000" initialSize="1" username="dpmmc" password="dpmmc"
+		driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/dpmmc"
+		poolPreparedStatements="true" />
+
+    <!-- AD connection information -->
+    <Environment name="ad/connectionURL" type="java.lang.String"
+                 description="Url of the LDAP server"
+                 value="ldap://hurle.site-mairie.noumea.nc:389"
+                 override="false" />
+    <Environment name="ad/connectionURL2" type="java.lang.String"
+                 description="Url of the LDAP server"
+                 value="ldap://gberge.site-mairie.noumea.nc:389"
+                 override="false" />
+    <Environment name="ad/connectionURL3" type="java.lang.String"
+                 description="Url of the LDAP server"
+                 value="ldap://netone.site-mairie.noumea.nc:389"
+                 override="false" />
+    <Environment name="ad/userBase" type="java.lang.String"
+                 description="Read-only user Dn for DPMMC application"
+                 value="cn=adminwas,ou=was,ou=appli,ou=z-users,dc=site-mairie,dc=noumea,dc=nc"
+                 override="false" />
+    <Environment name="ad/userPassword" type="java.lang.String"
+                 description="Password for the above defined ldap user"
+                 value="planet"
+                 override="false" />
+
+</Context>

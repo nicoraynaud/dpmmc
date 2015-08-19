@@ -1,0 +1,29 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+    <window id="deleteConfirmationPopup"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vmConfirmation') @init('nc.noumea.mairie.dpmmc.viewModel.DeleteFicheConfirmationViewModel', ficheId=arg['ficheId'])"
+            mode="modal" position="center,center" width="500px" height="140px" closable="true"
+            title="Confirmer la suppression" border="normal"
+            action="show: slideDown;hide: slideUp"
+            onCancel="win.detach()">
+
+        <vbox vflex="1" hflex="1">
+
+            <vbox vflex="1" hflex="1">
+                <label value="Veuillez saisir un motif de suppression :"/>
+                <textbox value="@bind(vmConfirmation.motif)" constraint="no empty: Champ requis" hflex="1" maxlength="250"/>
+            </vbox>
+
+            <hbox hflex="1" pack="center" align="center">
+                <button label="Annuler" onClick="deleteConfirmationPopup.detach()" style="margin-right: 5px"/>
+                <button label="Supprimer" onClick="@command('delete', win=deleteConfirmationPopup)"
+                        style="margin-left: 5px"/>
+            </hbox>
+
+        </vbox>
+    </window>
+</zk>

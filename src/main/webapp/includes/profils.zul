@@ -1,0 +1,48 @@
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+
+    <window vflex="1" hflex="1" border="none"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vmProfils') @init('nc.noumea.mairie.dpmmc.viewModel.ProfilViewModel')"
+            contentStyle="overflow:auto; padding: 0px 0px 0px 0px;">
+
+        <menubar>
+            <menuitem label="Créer un profil" onClick="@command('createProfil')" visible="${sec:isAllGranted('ROLE_ADMINISTRATION')}"/>
+        </menubar>
+
+        <grid model="@load(vmProfils.profils)" mold="paging" pageSize="20" style="margin: 10px">
+            <columns height="22px">
+                <column label="Nom" />
+                <column label="ADMINISTRATION" align="center" />
+                <column label="CREER" align="center" />
+                <column label="MODIF_N_BRIGADES" align="center" />
+                <column label="MODIF_1_BRIGADE" align="center" />
+                <column label="CLOTURER" align="center" />
+                <column label="DECLOTURER" align="center" />
+                <column label="SUPPRIMER" align="center" />
+                <column label="RECHERCHER" align="center" />
+                <column label="STATS" align="center" />
+            </columns>
+            <template name="model">
+                <row>
+                    <textbox inplace="true"
+                             value="@bind(each.nom)" width="99%" onChange="@command('itemChanged', item=each)" />
+                    <checkbox checked="@bind(each.droitAdministration)" onCheck="@command('itemChanged', item=each)" />
+                    <checkbox checked="@bind(each.droitCreationFiche)" onCheck="@command('itemChanged', item=each)" />
+                    <checkbox checked="@bind(each.droitModificationFicheToutesBrigades)" onCheck="@command('itemChanged', item=each)" />
+                    <checkbox checked="@bind(each.droitModificationFicheLaBrigade)" onCheck="@command('itemChanged', item=each)" />
+                    <checkbox checked="@bind(each.droitClotureFiche)" onCheck="@command('itemChanged', item=each)" />
+                    <checkbox checked="@bind(each.droitDeclotureFiche)" onCheck="@command('itemChanged', item=each)" />
+                    <checkbox checked="@bind(each.droitSuppressionFiche)" onCheck="@command('itemChanged', item=each)" />
+                    <checkbox checked="@bind(each.droitRechercheFiche)" onCheck="@command('itemChanged', item=each)" />
+                    <checkbox checked="@bind(each.droitStatistiques)" onCheck="@command('itemChanged', item=each)" />
+                </row>
+            </template>
+        </grid>
+
+    </window>
+</zk>

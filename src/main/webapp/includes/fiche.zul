@@ -1,0 +1,424 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+    <window vflex="1" hflex="1" border="none"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vmFiche') @init('nc.noumea.mairie.dpmmc.viewModel.FicheViewModel')"
+            contentStyle="overflow:auto;">
+        <style dynamic="true">
+
+            <!--
+            Make Plain Grid
+
+            -->
+            .GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row .z-cell, div.z-grid {
+                border: none;
+                overflow: hidden;
+                zoom: 1;
+                background: white !important;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-bottom: none;
+            }
+
+            .labelError {
+                color: red;
+            }
+
+            .borderError {
+                border-color: red;
+            }
+
+            .popupVisible {
+                border-color: red;
+            }
+
+            .popupHidden {
+                visibility: hidden !important;
+                display: none !important;
+            }
+
+            .z-combobox-disabled *, .z-bandbox-disabled *, .z-datebox-disabled *, .z-timebox-disabled *, .z-spinner-disabled *, .z-doublespinner-disabled * {
+                color: black !important;
+                opacity: 0.8 !important;
+            }
+
+            .z-textbox[disabled] {
+                color: black !important;
+            }
+
+            .labelDisabled {
+                color: black !important;
+                opacity: 0.8 !important;
+            }
+
+            .z-groupbox {
+                padding-top: 8px !important;
+            }
+
+            .newRow {
+                background-color: lightgoldenrodyellow !important;
+            }
+
+            .newRow td.z-row-inner {
+                background-color: lightgoldenrodyellow !important;
+            }
+
+        </style>
+
+        <vlayout>
+            <menubar id="menubar" autodrop="true">
+                <menuitem label="Sauver" iconSclass="z-icon-save" onClick="@command('save')"
+                          visible="@bind(vmFiche.fiche.canEdit)"/>
+                <menuseparator
+                        visible="@bind(vmFiche.fiche.canEdit and (vvmFiche.fiche.canCloture or vmFiche.fiche.canDecloture or vmFiche.fiche.canDelete))"/>
+                <menuitem label="Clôturer" iconSclass="z-icon-lock" onClick="@command('cloturer')"
+                          visible="@bind(vmFiche.fiche.canCloture)"/>
+                <menuitem label="Déclôturer" iconSclass="z-icon-unlock" onClick="@command('decloturer')"
+                          visible="@bind(vmFiche.fiche.canDecloture)"/>
+                <menuitem label="Supprimer" iconSclass="z-icon-trash-o" onClick="@command('delete')"
+                          visible="@bind(vmFiche.fiche.canDelete)"/>
+
+
+                <menuitem label="Imprimer" iconSclass="z-icon-print"
+                          onClick="@command('printFiche')"
+                          style="float: right !important;"/>
+            </menubar>
+
+            <div style="text-align: right;">
+                <label value="Statut : " style="font-weight: bold; font-style: italic;"/>
+                <label value="@bind(vmFiche.fiche.fiche.statut)" style="font-style: italic;"/>
+            </div>
+            <div style="text-align: right;">
+                <label value="@bind(vmFiche.fiche.motif)" style="font-style: italic; color: darkgrey;"/>
+            </div>
+
+            <groupbox closable="false">
+                <caption label="Synthèse MC"/>
+                <grid sclass="GridLayoutNoBorder" hflex="1">
+                    <columns>
+                        <column hflex="2"></column>
+                        <column hflex="5"></column>
+                        <column hflex="2"></column>
+                        <column hflex="5"></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value="GDH Appel : " style="margin-left: 10px" tooltip="gdhAppelP"
+                                   sclass="@bind(vmFiche.formErrors.containsKey('gdhAppel') ? 'labelError':'')"/>
+                            <datebox id="gdhAppel" value="@bind(vmFiche.fiche.fiche.gdhAppel)" format="dd/MM/yyyy HH:mm"
+                                     hflex="1" disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                            <label value="GDH Arrivée : " style="margin-left: 10px"/>
+                            <datebox id="gdhArrivee" value="@bind(vmFiche.fiche.fiche.gdhArrivee)"
+                                     format="dd/MM/yyyy HH:mm" hflex="1" disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                        </row>
+                        <row>
+                            <label value="Adresse : " style="margin-left: 10px" tooltip="adresseP"
+                                   sclass="@bind(vmFiche.formErrors.containsKey('adresse') ? 'labelError':'')"/>
+                            <cell colspan="3">
+                                <grid>
+                                    <columns>
+                                        <column hflex="1"/>
+                                        <column hflex="1"/>
+                                        <column hflex="2"/>
+                                        <column hflex="1"/>
+                                        <column hflex="2"/>
+                                        <column hflex="1"/>
+                                        <column hflex="2"/>
+                                    </columns>
+                                    <rows>
+                                        <row>
+                                            <cell colspan="2">
+                                                <label value="Lieu prédéfini : "/>
+                                            </cell>
+                                            <cell colspan="5">
+                                                <combobox hflex="1" model="@bind(vmFiche.lieuxPredefinis)"
+                                                          selectedItem="@bind(vmFiche.selectedLieuPredefini)"
+                                                          onChange="@command('refreshLieuPredefini')" autodrop="true"
+                                                          disabled="@bind(not vmFiche.fiche.canEdit)">
+                                                    <template name="model">
+                                                        <comboitem label="@load(each.libelleLong)"/>
+                                                    </template>
+                                                </combobox>
+                                            </cell>
+                                        </row>
+                                        <row>
+                                            <cell rowspan="2" style="margin-left: 0px; padding-left: 0px;">
+                                                <button label=" Modifier" iconSclass="z-icon-pencil" onClick="@command('editAdresse')"
+                                                        disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                                            </cell>
+                                            <label value="Ville : "/>
+                                            <label style="color: black" value="@bind(vmFiche.selectedVille)"/>
+                                            <label value="Secteur : "/>
+                                            <label style="color: black" value="@bind(vmFiche.selectedSecteur)"/>
+                                            <label value="Quartier : "/>
+                                            <label style="color: black" value="@bind(vmFiche.selectedQuartier)"/>
+                                        </row>
+                                        <row>
+                                            <label value="Numéro &amp; Voie: "/>
+                                            <cell colspan="3">
+                                                <label style="color: black" value="@bind(vmFiche.numero)"/>
+                                                <label style="color: black" value=" "/>
+                                                <label style="color: black" value="@bind(vmFiche.selectedNomVoie)"/>
+                                            </cell>
+                                            <label value="Complément : "/>
+                                            <textbox value="@bind(vmFiche.fiche.fiche.complementAdresse)" hflex="1"
+                                                     disabled="@bind(not vmFiche.fiche.canEdit or vmFiche.fiche.fiche.lieuPredefini ne null)"/>
+                                        </row>
+                                    </rows>
+                                </grid>
+                            </cell>
+                        </row>
+                        <row>
+                            <label value="Equipages : " style="margin-left: 10px" tooltip="equipagesP"
+                                   sclass="@bind(vmFiche.formErrors.containsKey('equipages') ? 'labelError':'')"/>
+                            <cell colspan="5" hflex="1">
+                                <hbox>
+                                    <button iconSclass="z-icon-plus" onClick="@command('addEquipageCommand')"
+                                            disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                                    <div children="@load(vmFiche.fichePatrouilles)"
+                                         sclass="@load(vmFiche.fiche.canEdit ? '' : 'labelDisabled')">
+                                        <template name="children">
+                                            <label value="@load(each.label)"/>
+                                            <h:br/>
+                                        </template>
+                                    </div>
+                                </hbox>
+                            </cell>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+
+            <groupbox closable="false">
+                <caption label="Saisine"/>
+                <grid sclass="GridLayoutNoBorder" hflex="1">
+                    <columns>
+                        <column hflex="2"></column>
+                        <column hflex="5"></column>
+                        <column hflex="2"></column>
+                        <column hflex="5"></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value="Catégorie : " style="margin-left: 10px" tooltip="categorieSaisineP"
+                                   sclass="@bind(vmFiche.formErrors.containsKey('categorieSaisine') ? 'labelError':'')"/>
+                            <combobox hflex="1" model="@bind(vmFiche.categorieSaisines)" autodrop="true"
+                                      selectedItem="@bind(vmFiche.fiche.fiche.categorieSaisine)"
+                                      disabled="@bind(not vmFiche.fiche.canEdit)">
+                                <template name="model">
+                                    <comboitem label="@load(each.libelleLong)"/>
+                                </template>
+                            </combobox>
+                            <label value="Contact Interpolice : " style="margin-left: 10px"/>
+                            <combobox hflex="1" model="@bind(vmFiche.contactInterpolices)" autodrop="true"
+                                      selectedItem="@bind(vmFiche.fiche.fiche.contactInterpolice)"
+                                      disabled="@bind(not vmFiche.fiche.canEdit)">
+                                <template name="model">
+                                    <comboitem label="@load(each.libelleLong)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                        <row>
+                            <label value="Situation initiale : " style="margin-left: 10px;"/>
+                            <cell colspan="3">
+                                <textbox hflex="1" multiline="true" rows="4"
+                                         value="@bind(vmFiche.fiche.fiche.situationInitiale)"
+                                         disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                            </cell>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+
+            <separator bar="true" style="margin: 10px"/>
+
+
+            <tabbox height="235px">
+                <tabs>
+                    <tab label="@bind(vmFiche.formErrors.containsKey('appelants') ? 'TPH Appelant !':'TPH Appelant')" closable="false" tooltip="appelantsP"/>
+                    <tab label="@bind(vmFiche.formErrors.containsKey('appelants') ? 'Faits !':'Faits')" closable="false" tooltip="faitsP" />
+                    <tab label="@bind(vmFiche.formErrors.containsKey('appelants') ? 'Personnes !':'Personnes')" closable="false" tooltip="personnesP" />
+                    <tab label="@bind(vmFiche.formErrors.containsKey('appelants') ? 'Procédures !':'Procédures')" closable="false" tooltip="proceduresP" />
+                </tabs>
+                <tabpanels>
+                    <tabpanel vflex="1">
+                        <button iconSclass="z-icon-plus" label="Ajouter" onClick="@command('addAppelantCommand')"
+                                style="margin-bottom: 5px;" disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                        <grid model="@bind(vmFiche.ficheAppelants)"
+                              emptyMessage="Aucun TPH appelant." vflex="1">
+                            <columns>
+                                <column hflex="5" label="Nom" align="left"/>
+                                <column hflex="1" label="Numéro" align="left"/>
+                                <column hflex="1" label="Action" align="center"/>
+                            </columns>
+                            <template name="model" var="a">
+                                <row sclass="@bind(a.id eq null ? 'newRow' : 'oldRow')">
+                                    <textbox hflex="1" inplace="true" value="@bind(a.requerant)"
+                                             disabled="@bind(not vmFiche.fiche.canEdit)" constraint="no empty: Champ requis" />
+                                    <textbox hflex="1" inplace="true" value="@bind(a.numero)"
+                                             disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                                    <button label="" iconSclass="z-icon-minus"
+                                            onClick="@command('removeAppelantCommand', item=a)"
+                                            disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                                </row>
+                            </template>
+                        </grid>
+                    </tabpanel>
+                    <tabpanel vflex="1">
+                        <button iconSclass="z-icon-plus" label="Ajouter" onClick="@command('addFaitCommand')"
+                                style="margin-bottom: 5px;" disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                        <grid model="@bind(vmFiche.ficheFaits)"
+                              emptyMessage="Aucun Fait." vflex="1">
+                            <columns>
+                                <column hflex="4" label="Nature" align="left"/>
+                                <column hflex="2" label="Nombre" align="left"/>
+                                <column hflex="1" label="Action" align="center"/>
+                            </columns>
+                            <template name="model" var="f">
+                                <row sclass="@bind(f.id eq null ? 'newRow' : 'oldRow')">
+                                    <combobox apply="org.zkoss.bind.BindComposer"
+                                              viewModel="@id('vmFait') @init('nc.noumea.mairie.dpmmc.viewModel.FaitModel')"
+                                              inplace="true" model="@load(vmFait.natureFaits)"
+                                              selectedItem="@bind(f.nature)" autodrop="true"
+                                              hflex="1" placeholder="Choisissez..."
+                                              disabled="@bind(not vmFiche.fiche.canEdit)" constraint="no empty: Champ requis">
+                                        <template name="model" var="nf">
+                                            <comboitem label="@load(nf.libelleLong)"
+                                                       value="@load(nf)"
+                                                       description="@load(c:cat3(nf.categorieFait.libelleCourt, ' - ', nf.categorieFait.libelleLong))"/>
+                                        </template>
+                                    </combobox>
+                                    <spinner hflex="1" inplace="true" value="@bind(f.nombre)" format=",###"
+                                             disabled="@bind(not vmFiche.fiche.canEdit)" constraint="min 0,no empty: Champ requis"/>
+                                    <button label="" iconSclass="z-icon-minus"
+                                            onClick="@command('removeFaitCommand', item=f)"
+                                            disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                                </row>
+                            </template>
+                        </grid>
+                    </tabpanel>
+                    <tabpanel vflex="1">
+                        <button iconSclass="z-icon-plus" label="Ajouter" onClick="@command('addPersonneCommand')"
+                                style="margin-bottom: 5px;" disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                        <grid model="@bind(vmFiche.fichePersonnes)"
+                              emptyMessage="Aucune personne." vflex="1">
+                            <columns>
+                                <column hflex="3" label="Catégorie" align="left"/>
+                                <column hflex="3" label="Nom" align="left"/>
+                                <column hflex="1" label="Nombre" align="left"/>
+                                <column hflex="3" label="Détail" align="left"/>
+                                <column hflex="1" label="Action" align="center"/>
+                            </columns>
+                            <template name="model" var="p">
+                                <row sclass="@bind(p.id eq null ? 'newRow' : 'oldRow')">
+                                    <combobox apply="org.zkoss.bind.BindComposer"
+                                              viewModel="@id('vmPersonne') @init('nc.noumea.mairie.dpmmc.viewModel.PersonneModel')"
+                                              inplace="true" model="@load(vmPersonne.categoriesPersonnes)"
+                                              selectedItem="@bind(p.categorie)" autodrop="true"
+                                              hflex="1" placeholder="Choisissez..."
+                                              disabled="@bind(not vmFiche.fiche.canEdit)" constraint="no empty: Champ requis">
+                                        <template name="model" var="cp">
+                                            <comboitem label="@load(cp.libelleLong))" value="@load(cp)"/>
+                                        </template>
+                                    </combobox>
+                                    <textbox hflex="1" inplace="true" value="@bind(p.nom)"
+                                             disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                                    <spinner hflex="1" inplace="true" value="@bind(p.nombre)" format=",###"
+                                             disabled="@bind(not vmFiche.fiche.canEdit)" constraint="min 0"/>
+                                    <textbox hflex="1" inplace="true" value="@bind(p.details)"
+                                             disabled="@bind(not vmFiche.fiche.canEdit)" />
+                                    <button label="" iconSclass="z-icon-minus"
+                                            onClick="@command('removePersonneCommand', item=p)"
+                                            disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                                </row>
+                            </template>
+                        </grid>
+                    </tabpanel>
+                    <tabpanel vflex="1">
+                        <button iconSclass="z-icon-plus" label="Ajouter" onClick="@command('addProcedureCommand')"
+                                style="margin-bottom: 5px;" disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                        <grid model="@bind(vmFiche.ficheProcedures)"
+                              emptyMessage="Aucune procédure." vflex="1">
+                            <columns>
+                                <column hflex="5" label="Catégorie" align="left"/>
+                                <column hflex="2" label="Numéro" align="left"/>
+                                <column hflex="1" label="Action" align="center"/>
+                            </columns>
+                            <template name="model">
+                                <row sclass="@bind(each.id eq null ? 'newRow' : 'oldRow')">
+                                    <combobox apply="org.zkoss.bind.BindComposer"
+                                              viewModel="@id('vmProcedure') @init('nc.noumea.mairie.dpmmc.viewModel.ProcedureModel')"
+                                              inplace="true" model="@load(vmProcedure.categorieProcedures)"
+                                              selectedItem="@bind(each.categorie)" autodrop="true"
+                                              hflex="1" placeholder="Choisissez..."
+                                              disabled="@bind(not vmFiche.fiche.canEdit)" constraint="no empty: Champ requis">
+                                        <template name="model">
+                                            <comboitem label="@load(each.libelleLong))" value="@load(each)"/>
+                                        </template>
+                                    </combobox>
+                                    <textbox hflex="1" inplace="true" value="@bind(each.numero)"
+                                             disabled="@bind(not vmFiche.fiche.canEdit)" constraint="no empty: Champ requis"/>
+                                    <button label="" iconSclass="z-icon-minus"
+                                            onClick="@command('removeProcedureCommand', item=each)"
+                                            disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                                </row>
+                            </template>
+                        </grid>
+                    </tabpanel>
+                </tabpanels>
+
+            </tabbox>
+
+            <div style="float: right; margin-top: 10px;">
+                <label value="@load(c:cat3('Fiche créée par ', vmFiche.fiche.creator, ' le '))"
+                       style="font-style: italic; color: darkgrey;"/>
+                <label value="@load(vmFiche.fiche.createDate)  @converter('formatedDate',format='dd/MM/yyyy HH:mm')"
+                       style="font-style: italic; color: darkgrey;"/>
+                <h:br/>
+                <label value="@load(c:cat3('Fiche modifiée par ', vmFiche.fiche.modifier, ' le '))"
+                       style="font-style: italic; color: darkgrey;" visible="@load(vmFiche.fiche.modifier ne null)"/>
+                <label value="@load(vmFiche.fiche.modifiedDate)  @converter('formatedDate',format='dd/MM/yyyy HH:mm')"
+                       style="font-style: italic; color: darkgrey;" visible="@load(vmFiche.fiche.modifier ne null)"/>
+            </div>
+            <div style="clear: both;"/>
+
+            <popup id="gdhAppelP"
+                   sclass="@bind(vmFiche.formErrors.containsKey('gdhAppel') ? 'popupVisible' : 'popupHidden')">
+                <label value="@bind(vmFiche.formErrors['gdhAppel'])" sclass="labelError"/>
+            </popup>
+            <popup id="categorieSaisineP"
+                   sclass="@bind(vmFiche.formErrors.containsKey('categorieSaisine') ? 'popupVisible' : 'popupHidden')">
+                <label value="@bind(vmFiche.formErrors['categorieSaisine'])" sclass="labelError"/>
+            </popup>
+            <popup id="adresseP"
+                   sclass="@bind(vmFiche.formErrors.containsKey('adresse') ? 'popupVisible' : 'popupHidden')">
+                <label value="@bind(vmFiche.formErrors['adresse'])" sclass="labelError"/>
+            </popup>
+            <popup id="equipagesP"
+                   sclass="@bind(vmFiche.formErrors.containsKey('equipages') ? 'popupVisible' : 'popupHidden')">
+                <label value="@bind(vmFiche.formErrors['equipages'])" sclass="labelError"/>
+            </popup>
+            <popup id="appelantsP"
+                   sclass="@bind(vmFiche.formErrors.containsKey('appelants') ? 'popupVisible' : 'popupHidden')">
+                <label value="@bind(vmFiche.formErrors['appelants'])" sclass="labelError"/>
+            </popup>
+            <popup id="faitsP"
+                   sclass="@bind(vmFiche.formErrors.containsKey('faits') ? 'popupVisible' : 'popupHidden')">
+                <label value="@bind(vmFiche.formErrors['faits'])" sclass="labelError"/>
+            </popup>
+            <popup id="personnesP"
+                   sclass="@bind(vmFiche.formErrors.containsKey('personnes') ? 'popupVisible' : 'popupHidden')">
+                <label value="@bind(vmFiche.formErrors['personnes'])" sclass="labelError"/>
+            </popup>
+            <popup id="proceduresP"
+                   sclass="@bind(vmFiche.formErrors.containsKey('procedures') ? 'popupVisible' : 'popupHidden')">
+                <label value="@bind(vmFiche.formErrors['procedures'])" sclass="labelError"/>
+            </popup>
+        </vlayout>
+
+    </window>
+</zk>

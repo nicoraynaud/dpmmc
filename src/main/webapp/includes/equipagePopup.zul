@@ -1,0 +1,89 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+    <window id="addEquipagePopup"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vmEquipage') @init('nc.noumea.mairie.dpmmc.viewModel.EquipageViewModel', equipages=arg['equipages'], ficheId=arg['ficheId'])"
+            mode="modal" position="center,center" width="600px" height="430px" closable="true"
+            title="Choisir les équipages" border="normal"
+            action="show: slideDown;hide: slideUp"
+            onCancel="win.detach()">
+        <grid>
+            <columns>
+                <column/>
+                <column width="50px"/>
+                <column/>
+            </columns>
+            <rows>
+                <row>
+                    <cell colspan="3">
+                        <vbox hflex="1">
+                            <combobox placeholder="Brigade"
+                                      model="@load(vmEquipage.brigades)"
+                                      selectedItem="@bind(vmEquipage.selectedBrigade)" hflex="1"
+                                      onChange="@command('refreshLists', whoChanged='brigades')">
+                                <template name="model">
+                                    <comboitem label="@load(each.libelleCourt)"/>
+                                </template>
+                            </combobox>
+                            <combobox placeholder="Indicatif" model="@load(vmEquipage.indicatifRadios)"
+                                      selectedItem="@bind(vmEquipage.selectedIndicatifRadio)" hflex="1"
+                                      onChange="@command('refreshLists', whoChanged='indicatifRadios')">
+                                <template name="model">
+                                    <comboitem label="@load(each.libelleLong)"/>
+                                </template>
+                            </combobox>
+                            <combobox placeholder="Véhicule" model="@load(vmEquipage.vehicules)"
+                                      selectedItem="@bind(vmEquipage.selectedVehicule)" hflex="1">
+                                <template name="model">
+                                    <comboitem label="@load(c:cat3(each.immatriculation, ' ', each.type))"/>
+                                </template>
+                            </combobox>
+                        </vbox>
+                    </cell>
+                </row>
+                <row>
+                    <listbox height="250px" model="@bind(vmEquipage.agents)" style="overflow: auto;"
+                             selectedItems="@bind(vmEquipage.selectedAgents)" multiple="true" hflex="1"
+                             emptyMessage="Veuillez sélectionner une Brigade ou une Patrouille...">
+                        <listhead>
+                            <listheader label="Agents sélectionnés" sort="none"/>
+                        </listhead>
+                        <template name="model" var="a">
+                            <listitem>
+                                <listcell>
+                                    <label value="@load(c:cat3(a.nom, ' ', a.prenom))"/>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                    <vbox align="center">
+                        <button iconSclass="z-icon-plus" onClick="@command('addPatrouilleCommand')"/>
+                    </vbox>
+                    <listbox height="250px" model="@bind(vmEquipage.patrouilles)" hflex="1"
+                             emptyMessage="Formez des équipages en sélectionnant une brigade, un véhicule et des agents...">
+                        <listhead>
+                            <listheader label="Equipages" sort="none"/>
+                        </listhead>
+                        <template name="model" var="p">
+                            <listitem>
+                                <listcell>
+                                    <label value="@load(p.label)"/>
+                                    <button iconSclass="z-icon-minus" onClick="@command('removePatrouilleCommand', item=p)"/>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </row>
+                <row align="center">
+                    <cell colspan="3">
+                        <button label="Annuler" onClick="addEquipagePopup.detach()" style="margin-right: 5px"/>
+                        <button label="Sauver" onClick="@command('save', win=addEquipagePopup)" style="margin-left: 5px"/>
+                    </cell>
+                </row>
+            </rows>
+        </grid>
+    </window>
+</zk>

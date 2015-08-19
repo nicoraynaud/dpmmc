@@ -1,0 +1,26 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <vlayout apply="org.zkoss.bind.BindComposer"
+             viewModel="@id('vm') @init('nc.noumea.mairie.dpmmc.viewModel.admin.ParametreApplicationViewModel')">
+
+        <grid vflex="1" hflex="1" mold="paging" pageSize="10" width="100%"
+              model="@bind(vm.data)">
+            <columns>
+                <column label="Nom" align="center"/>
+                <column label="Description" align="center"/>
+                <column label="Valeur" align="center"/>
+            </columns>
+            <template name="model">
+                <row>
+                    <textbox hflex="1" inplace="true" value="@bind(each.code)" onChange="@command('itemChanged', item=each)"/>
+                    <textbox hflex="1" inplace="true" value="@bind(each.libelle)" onChange="@command('itemChanged', item=each)"/>
+                    <textbox hflex="1" inplace="true" value="@bind(each.valeur)" onChange="@command('itemChanged', item=each)"/>
+                </row>
+            </template>
+        </grid>
+    </vlayout>
+
+</zk>

@@ -1,0 +1,73 @@
+<?page ?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <style>
+        body {
+            padding: 0px !important;
+        }
+    </style>
+
+    <borderlayout sclass="loginPage">
+
+        <center border="0" sclass="transparentBg">
+            <window id="loginwin" title="Authentification DPM-MC" border="normal" width="400px" mode="overlapped"
+                    position="center,top" style="margin-top: 200px;">
+                <!-- this form-login-page form is also used as the
+                     form-error-page to ask for a login again. -->
+                <html style="color:red; font-family: arial, helvetica, verdana, sans-serif"
+                      if="${not empty param.login_error}">
+                <![CDATA[
+            Impossible de vous authentifier.<br/>
+            Raison: ${SPRING_SECURITY_LAST_EXCEPTION.message}
+           ]]>
+                </html>
+
+                <html style="color:red; font-family: arial, helvetica, verdana, sans-serif"
+                      if="${not empty param.denied}">
+                <![CDATA[
+            Vous n'avez pas les droits nécessaires pour accéder à cette application.
+           ]]>
+                </html>
+
+
+                <h:form id="f" name="f" action="j_spring_security_check" method="POST"
+                        xmlns:h="http://www.w3.org/1999/xhtml">
+                    <grid>
+                        <columns>
+                            <column width="115px"/>
+                            <column hflex="2"/>
+                            <column hflex="2"/>
+                        </columns>
+                        <rows>
+                            <row>
+                                <cell rowspan="3">
+                                    <image sclass="login-mairie-logo" src="img/logo_police_nc.jpg"/>
+                                </cell>
+                                Identifiant:
+                                <textbox id="u" name="j_username" hflex="1"/>
+                            </row>
+                            <row>Mot de passe:
+                                <textbox id="p" type="password" name="j_password" hflex="1"/>
+                            </row>
+                            <row align="center">
+                                <cell colspan="2">
+                                    <button type="submit" label="Se connecter" width="150px" focus="true"/>
+                                </cell>
+                            </row>
+                        </rows>
+                    </grid>
+                </h:form>
+
+            </window>
+        </center>
+
+        <south border="0">
+            <include src="includes/footer.zul"/>
+        </south>
+
+    </borderlayout>
+
+</zk>

@@ -1,0 +1,52 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+    <window id="updateAffectationsPopup"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vmRattachement') @init('nc.noumea.mairie.dpmmc.viewModel.RattachementViewModel', utilisateur=arg['utilisateur'])"
+            mode="modal" position="center,center" width="650px" height="350px" closable="true"
+            title="Choisir les rattachements" border="normal"
+            action="show: slideDown;hide: slideUp"
+            onCancel="win.detach()">
+
+        <vbox vflex="1">
+
+            <button iconSclass="z-icon-plus" label="Ajouter" onClick="@command('addRattachement')"
+                    style="margin-bottom: 5px;"/>
+            <grid model="@bind(vmRattachement.rattachements)" mold="paging" pageSize="5" autopaging="false" height="233px">
+                <columns>
+                    <column label="Brigade" align="center" hflex="2"/>
+                    <column label="Début" align="center" hflex="2"/>
+                    <column label="Fin" align="center" hflex="2"/>
+                    <column label="Habituel ?" align="center" hflex="1"/>
+                    <column label="Action" align="center" hflex="1"/>
+                </columns>
+                <template name="model">
+                    <row>
+                        <combobox inplace="true" constraint="no empty" autodrop="true"
+                                  model="@load(vmRattachement.brigades)" selectedItem="@bind(each.brigade)" hflex="1"
+                                  value="@load(each.brigade.libelleCourt)">
+                            <template name="model">
+                                <comboitem label="@load(each.libelleCourt)" value="@bind(each)"/>
+                            </template>
+                        </combobox>
+                        <datebox inplace="true" value="@bind(each.debut)" format="dd/MM/yyyy HH:mm" constraint="no empty"/>
+                        <datebox inplace="true" value="@bind(each.fin)" format="dd/MM/yyyy HH:mm"/>
+                        <checkbox checked="@bind(each.brigadeHabituelle)"/>
+                        <button label="" iconSclass="z-icon-minus"
+                                onClick="@command('removeRattachement', item=each)"/>
+                    </row>
+                </template>
+            </grid>
+
+            <hbox hflex="1" pack="center" align="center">
+                <button label="Annuler" onClick="updateAffectationsPopup.detach()" style="margin-right: 5px"/>
+                <button label="Sauver" onClick="@command('save', win=updateAffectationsPopup)"
+                        style="margin-left: 5px"/>
+            </hbox>
+
+        </vbox>
+    </window>
+</zk>

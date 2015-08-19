@@ -1,0 +1,33 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <vlayout apply="org.zkoss.bind.BindComposer"
+             viewModel="@id('vm') @init('nc.noumea.mairie.dpmmc.viewModel.admin.CategorieFaitViewModel')">
+        <button label="Ajouter" iconSclass="z-icon-plus" style="margin-bottom: 5px;" onClick="@command('addItem')"/>
+
+        <grid vflex="1" hflex="1" mold="paging" pageSize="10" width="100%"
+              model="@bind(vm.data)">
+            <columns>
+                <column label="Libellé court" align="center" sort="auto(libelleCourt)"/>
+                <column label="Libellé long" align="center" sort="auto(libelleLong)"/>
+                <column label="Archivée" align="center" sort="auto(archivee)"/>
+                <column label="Par défaut" align="center" sort="auto(parDefaut)"/>
+                <column label="Ordre" align="center" sort="auto(ordre)"/>
+                <column label="Statistiques" align="center" sort="auto(statistiques)"/>
+            </columns>
+            <template name="model">
+                <row>
+                    <textbox hflex="1" inplace="true" value="@bind(each.libelleCourt)" onChange="@command('itemChanged', item=each)"/>
+                    <textbox hflex="1" inplace="true" value="@bind(each.libelleLong)" onChange="@command('itemChanged', item=each)"/>
+                    <checkbox checked="@bind(each.archivee)" onCheck="@command('itemChanged', item=each)" />
+                    <checkbox checked="@bind(each.parDefaut)" onCheck="@command('itemChanged', item=each)"/>
+                    <spinner hflex="1" inplace="true" value="@bind(each.ordre)" format=",###" constraint="min 0" onChange="@command('itemChanged', item=each)"/>
+                    <checkbox checked="@bind(each.statistiques)" onCheck="@command('itemChanged', item=each)"/>
+                </row>
+            </template>
+        </grid>
+    </vlayout>
+
+</zk>

@@ -1,0 +1,68 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <window vflex="1" hflex="1" border="none"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vmTbd') @init('nc.noumea.mairie.dpmmc.viewModel.TbdViewModel')"
+            contentStyle="overflow:auto;">
+
+        <listbox id="alerteRecidivesGrid" model="@bind(vmTbd.lastActivities)"
+                 mold="paging" pageSize="@load(vmTbd.pageSizeActivities)">
+            <auxhead>
+                <auxheader colspan="5">Alertes récidives</auxheader>
+            </auxhead>
+            <listhead>
+                <listheader hflex="1" label="Référence" align="center"/>
+                <listheader hflex="4" label="Catégorie de saisine" align="left"/>
+                <listheader hflex="4" label="Quartier"  align="left"/>
+                <listheader hflex="1" label="Récidive ?" align="center"/>
+                <listheader hflex="1" label="Action" align="center"/>
+            </listhead>
+            <template name="model" var="f">
+                <listitem zclass="@bind(f.recidive ? 'alertStyle' : '')">
+                    <listcell label="@load(f.reference)"/>
+                    <listcell label="@load(f.categorieSaisine)"/>
+                    <listcell label="@load(f.quartier)"/>
+                    <listcell label="@load(f.recidive eq true ? 'oui':'non')"/>
+                    <listcell>
+                        <button label="" iconSclass="z-icon-search" visible="@load(not f.canEdit)" onClick="@global-command('openFiche', idFiche=f.idFiche)"/>
+                        <button label="" iconSclass="z-icon-pencil" visible="@load(f.canEdit)" onClick="@global-command('openFiche', idFiche=f.idFiche)"/>
+                    </listcell>
+                </listitem>
+            </template>
+
+        </listbox>
+
+        <separator bar="true" style="margin: 20px"/>
+
+        <listbox id="lastClotureesGrid2" model="@bind(vmTbd.lastFichesCloturees)"
+                 mold="paging" pageSize="@load(vmTbd.pageSizeCloturees)">
+            <auxhead>
+                <auxheader colspan="4">Dernières fiches clôturées</auxheader>
+            </auxhead>
+            <listhead>
+                <listheader hflex="1" label="Référence" align="center"/>
+                <listheader hflex="4" label="Catégorie de saisine" align="left"/>
+                <listheader hflex="4" label="Quartier"  align="left"/>
+                <listheader hflex="1" label="Action" align="center"/>
+            </listhead>
+            <template name="model" var="f">
+                <listitem>
+                    <listcell label="@bind(f.reference)"/>
+                    <listcell label="@bind(f.categorieSaisine)"/>
+                    <listcell label="@bind(f.quartier)"/>
+                    <listcell>
+                        <button label="" iconSclass="z-icon-search" visible="@load(not f.canEdit)" onClick="@global-command('openFiche', idFiche=f.idFiche)"/>
+                        <button label="" iconSclass="z-icon-pencil" visible="@load(f.canEdit)" onClick="@global-command('openFiche', idFiche=f.idFiche)"/>
+                    </listcell>
+                </listitem>
+            </template>
+
+        </listbox>
+
+
+    </window>
+
+</zk>

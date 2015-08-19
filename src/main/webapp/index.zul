@@ -1,0 +1,95 @@
+<?page ?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <borderlayout>
+
+
+        <north border="0">
+            <include src="/includes/header.zul"/>
+        </north>
+
+        <center border="0">
+            <hlayout width="100%" vflex="1"
+                     viewModel="@id('vmIndex') @init('nc.noumea.mairie.dpmmc.viewModel.IndexViewModel')"
+                     apply="org.zkoss.bind.BindComposer">
+
+                <!-- Left menu -->
+                <vlayout vflex="1" width="250px" style="overflow: auto;">
+
+                    <!-- General menu -->
+                    <panel title="Menu" border="normal">
+                        <panelchildren>
+                            <vlayout>
+                                <toolbarbutton id="rechercheMenuButton" label="Rechercher"
+                                               onClick="@command('openTab', id='rechercheTabPanel', label='Recherche', zulTemplate='/includes/recherche.zul', closable=true, sclass='')"/>
+                                <toolbarbutton label="Créer"
+                                               onClick="@global-command('newFiche')"
+                                               visible="${sec:isAllGranted('ROLE_CREATION_FICHE')}"/>
+                                <toolbarbutton id="utilisateursMenuButton" label="Administrer Utilisateurs"
+                                               onClick="@command('openTab', id='utilisateursTabPanel', label='Utilisateurs', zulTemplate='/includes/utilisateurs.zul', closable=true, sclass='utilisateur-profil-tab')"
+                                               visible="${sec:isAllGranted('ROLE_ADMINISTRATION')}"/>
+                                <toolbarbutton id="profilsMenuButton" label="Administrer Profils"
+                                               onClick="@command('openTab', id='profilsTabPanel', label='Profils', zulTemplate='/includes/profils.zul', closable=true, sclass='utilisateur-profil-tab')"
+                                               visible="${sec:isAllGranted('ROLE_ADMINISTRATION')}"/>
+                                <toolbarbutton id="adminMenuButton" label="Administrer Listes"
+                                               onClick="@command('openTab', id='adminTabPanel', label='Administration', zulTemplate='/includes/administration.zul', closable=true, sclass='utilisateur-profil-tab')"
+                                               visible="${sec:isAllGranted('ROLE_ADMINISTRATION')}"/>
+                            </vlayout>
+
+                        </panelchildren>
+                    </panel>
+
+                    <!-- Geolocalisation tickets -->
+                    <include src="includes/geolocList.zul"/>
+
+                </vlayout>
+
+
+                <!--<tabbox vflex="1" hflex="1" id="tabbox">-->
+                    <!--<tabs children="@load(vmIndex.tabList)">-->
+                        <!--<template name="children">-->
+                            <!--<tab id="@load(each.id)" label="@bind(each.label)" closable="@load(each.closable)"-->
+                                 <!--sclass="@load(each.sclass)" onClose="@command('closingTab', tab=each, event=event)"-->
+                                 <!--selected="@load(vmIndex.selectedTab eq each)"-->
+                                 <!--onSelect="@command('selectTab',item=each)"/>-->
+                        <!--</template>-->
+                    <!--</tabs>-->
+                    <!--<tabpanels children="@load(vmIndex.tabList)">-->
+                        <!--<template name="children">-->
+                            <!--<tabpanel-->
+                                    <!--onDrop="@global-command('newFiche', geolocFiche=event.dragged.parent.parent.parent.parent.value)"-->
+                                    <!--droppable="true">-->
+                                <!--<include param="@load(each.param)" src="@load(each.zulTemplate)"/>-->
+                            <!--</tabpanel>-->
+                        <!--</template>-->
+                    <!--</tabpanels>-->
+                <!--</tabbox>-->
+                <tabbox vflex="1" hflex="1" id="tabbox" model="@bind(vmIndex.tabList)">
+                    <template name="model:tab">
+                        <tab id="@load(each.id)" label="@bind(each.label)" closable="@load(each.closable)"
+                             sclass="@load(each.sclass)" onClose="@command('closingTab', tab=each, event=event)"
+                             selected="@load(vmIndex.selectedTab eq each)"
+                             onSelect="@command('selectTab',item=each)"/>
+                    </template>
+                    <template name="model:tabpanel">
+                        <tabpanel
+                                onDrop="@global-command('newFiche', geolocFiche=event.dragged.parent.parent.parent.parent.value)"
+                                droppable="true">
+                            <include param="@load(each.param)" src="@load(each.zulTemplate)"/>
+                        </tabpanel>
+                    </template>
+                </tabbox>
+
+            </hlayout>
+        </center>
+
+        <south border="0">
+            <include src="includes/footer.zul"/>
+        </south>
+
+    </borderlayout>
+</zk>

@@ -1,0 +1,13 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <div align="center" sclass="footer-div">
+        <div>
+            <div><label value="Logiciel de gestion des mains courantes - "/><label value="DPMMC-${version}"/> </div>
+            <div><label value="Direction de la Police Municipale - Mairie de Nouméa"/></div>
+        </div>
+    </div>
+
+</zk>

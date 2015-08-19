@@ -1,0 +1,51 @@
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <window vflex="1" hflex="1" border="none"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vmAdm') @init('nc.noumea.mairie.dpmmc.viewModel.AdministrationViewModel')"
+            contentStyle="overflow:auto; padding: 0px 0px 0px 0px;">
+
+        <style dynamic="true">
+
+            <!--
+            Make Plain Grid
+
+            -->
+            .GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row .z-cell, div.z-grid {
+                border: none;
+                overflow: hidden;
+                zoom: 1;
+                background: white !important;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-bottom: none;
+            }
+        </style>
+
+        <vlayout>
+
+            <groupbox closable="false">
+                <caption label="Choix de la liste"/>
+                <combobox hflex="1" model="@load(vmAdm.dataToAdminister)"
+                          selectedItem="@bind(vmAdm.selectedData)" readonly="true"
+                          onChange="@command('refreshAdminGrid')">
+                    <template name="refT" var="cp">
+                        <label value="@bind(cp.name)"/>
+                    </template>
+                </combobox>
+            </groupbox>
+
+            <groupbox closable="false">
+                <caption label="@bind(vmAdm.selectedData.name)"/>
+                <include src="@bind(vmAdm.includedGrid)"/>
+            </groupbox>
+
+        </vlayout>
+
+    </window>
+</zk>

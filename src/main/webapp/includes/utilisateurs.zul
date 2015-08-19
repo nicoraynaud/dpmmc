@@ -1,0 +1,49 @@
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <window vflex="1" hflex="1" border="none"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vmUtilisateurs') @init('nc.noumea.mairie.dpmmc.viewModel.UtilisateurViewModel')"
+            contentStyle="overflow:auto; padding: 0px 0px 0px 0px;">
+
+        <menubar>
+            <menuitem label="Créer un utilisateur" onClick="@command('createUtilisateur')" visible="${sec:isAllGranted('ROLE_ADMINISTRATION')}"/>
+        </menubar>
+
+        <grid model="@load(vmUtilisateurs.utilisateurs)" mold="paging" pageSize="20" style="margin: 10px">
+            <columns height="22px">
+                <column label="Identifiant" />
+                <column label="Nom" />
+                <column label="Prénom" />
+                <column label="Matricule" />
+                <column label="Profil" />
+                <column label="Brigades" align="center"/>
+                <column label="Actif ?" align="center" />
+            </columns>
+            <template name="model">
+                <row>
+                    <textbox inplace="true"
+                             value="@bind(each.identifiant)" width="99%" onChange="@command('itemChanged', item=each)" />
+                    <textbox inplace="true"
+                             value="@bind(each.agent.nom)" width="99%" onChange="@command('itemChanged', item=each)" />
+                    <textbox inplace="true"
+                             value="@bind(each.agent.prenom)" width="99%" onChange="@command('itemChanged', item=each)" />
+                    <textbox inplace="true"
+                             value="@bind(each.agent.matricule)" width="99%" onChange="@command('itemChanged', item=each)" />
+                    <combobox inplace="true" onChange="@command('itemChanged', item=each)"
+                              model="@load(vmUtilisateurs.profils)" selectedItem="@bind(each.profil)" hflex="1" value="@load(each.profil.nom)">
+                        <template name="model">
+                            <comboitem label="@load(each.nom)" value="@bind(each)"/>
+                        </template>
+                    </combobox>
+                    <button iconSclass="z-icon-pencil" onClick="@command('updateRattachements', item=each)"/>
+                    <checkbox checked="@bind(each.actif)" onCheck="@command('itemChanged', item=each)" />
+                </row>
+            </template>
+        </grid>
+
+    </window>
+</zk>

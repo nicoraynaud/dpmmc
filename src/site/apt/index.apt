@@ -1,0 +1,29 @@
+ -----
+ About
+ -----
+ Nicolas RAYNAUD
+ -----
+  04/12/2014
+  
+DPMMC - Logiciel de gestion des mains courantes
+
+=====================
+
+* A propos
+
+
+ DPMMC est un projet permettant la consultation et la modification de mains courante pour la Direction de la Police Municipale de Nouméa.
+
+*----------*--------------:
+| <<Document>> | <<Lien>>         |
+*----------*--------------:
+| <<Application en qualification>> | {{http://was.site-mairie.noumea.nc/dpmmcRecette/home.seam}}     |
+*----------*--------------:
+| <<Application en production>> | -     |
+*----------*--------------:
+| <<Redmine projet>> | {{https://redmine.ville-noumea.nc/projects/dpmmc}}     |
+*----------*--------------:
+| <<SFGs>> | {{https://redmine.site-mairie.noumea.nc/projects/dpmmc/wiki/Sp%C3%A9cifications_fonctionnelles_G%C3%A9n%C3%A9rales}}     |
+*----------*--------------:
+| <<Droit (groupe AD) nécessaire pour utilisation de l'application>> | ?     |
+*----------*--------------:

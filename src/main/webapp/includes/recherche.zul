@@ -1,0 +1,181 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <style dynamic="true">
+
+        <!--
+        Make Plain Grid
+        -->
+        .GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row .z-cell, div.z-grid {
+            border: none;
+            overflow: hidden;
+            zoom: 1;
+            background: white;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .cellLayoutNoBorder {
+            background: white;
+        }
+
+    </style>
+
+    <window vflex="1" hflex="1" border="none"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vmRecherche') @init('nc.noumea.mairie.dpmmc.viewModel.RechercheViewModel')"
+            contentStyle="overflow:auto;">
+
+        <vbox>
+            <grid sclass="GridLayoutNoBorder" hflex="1">
+
+                <columns>
+                    <column hflex="1"></column>
+                    <column hflex="2"></column>
+                    <column hflex="1"></column>
+                    <column hflex="2"></column>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="N° Fiche :"/>
+                        <textbox value="@bind(vmRecherche.ficheNumero)" hflex="1" onOK="@command('search')"/>
+                        <label value="Lieu prédéfini :" style="margin-left: 10px"/>
+                        <combobox hflex="1" model="@load(vmRecherche.lieuxPredefinis)"
+                                  autodrop="true"
+                                  selectedItem="@bind(vmRecherche.selectedLieu)"
+                                  onOK="@command('search')">
+                            <template name="model">
+                                <comboitem label="@load(each.libelleLong)"/>
+                            </template>
+                        </combobox>
+                    </row>
+                    <row>
+                        <label value="Agent de saisie :"/>
+                        <combobox model="@load(vmRecherche.agents)" selectedItem="@bind(vmRecherche.selectedAgent)"
+                                  autodrop="true"
+                                  hflex="1"
+                                  onOK="@command('search')">
+                            <template name="model">
+                                <comboitem label="@load(c:cat3(each.nom, ' ', each.prenom))"/>
+                            </template>
+                        </combobox>
+                        <label value="Catégorie de personne :" style="margin-left: 10px"/>
+                        <combobox model="@load(vmRecherche.categoriePersonnes)"
+                                  autodrop="true"
+                                  selectedItem="@bind(vmRecherche.selectedCategoriePersonne)" hflex="1"
+                                  onOK="@command('search')">
+                            <template name="model">
+                                <comboitem label="@load(each.libelleLong)"/>
+                            </template>
+                        </combobox>
+                    </row>
+                    <row>
+                        <label value="Brigade :"/>
+                        <combobox model="@load(vmRecherche.brigades)" selectedItem="@bind(vmRecherche.selectedBrigade)"
+                                  autodrop="true"
+                                  hflex="1"
+                                  onOK="@command('search')">
+                            <template name="model">
+                                <comboitem label="@load(each.libelleCourt)"/>
+                            </template>
+                        </combobox>
+                        <label value="Nom de personne :" style="margin-left: 10px"/>
+                        <textbox value="@bind(vmRecherche.nomPersonne)" hflex="1" onOK="@command('search')"/>
+                    </row>
+                    <row>
+                        <label value="Catégorie :"/>
+                        <combobox model="@load(vmRecherche.categorieFaits)"
+                                  autodrop="true"
+                                  selectedItem="@bind(vmRecherche.selectedCategorieFait)" hflex="1"
+                                  onOK="@command('search')">
+                            <template name="model">
+                                <comboitem label="@load(each.libelleLong)"/>
+                            </template>
+                        </combobox>
+                        <label value="Date de saisie :" style="margin-left: 10px"/>
+                        <hbox>
+                            entre
+                            <datebox value="@bind(vmRecherche.dateSaisieStart)" format="dd/MM/yyyy HH:mm" hflex="1" onOK="@command('search')"/>
+                            et
+                            <datebox value="@bind(vmRecherche.dateSaisieEnd)" format="dd/MM/yyyy HH:mm" hflex="1" onOK="@command('search')"/>
+                        </hbox>
+                    </row>
+                    <row>
+                        <label value="Nature :"/>
+                        <combobox model="@load(vmRecherche.natureFaits)"
+                                  autodrop="true"
+                                  selectedItem="@bind(vmRecherche.selectedNature)" hflex="1"
+                                  onOK="@command('search')">
+                            <template name="model">
+                                <comboitem label="@load(each.libelleLong)"/>
+                            </template>
+                        </combobox>
+                    </row>
+                    <row>
+                        <label value="Secteur :"/>
+                        <combobox model="@load(vmRecherche.secteurs)" selectedItem="@bind(vmRecherche.selectedSecteur)"
+                                  autodrop="true"
+                                  hflex="1"
+                                  onOK="@command('search')">
+                            <template name="model">
+                                <comboitem label="@load(each.libelle)"/>
+                            </template>
+                        </combobox>
+                    </row>
+                    <row>
+                        <label value="Quartier :"/>
+                        <combobox model="@load(vmRecherche.quartiers)" autodrop="true"
+                                  selectedItem="@bind(vmRecherche.selectedQuartier)" hflex="1"
+                                  onOK="@command('search')">
+                            <template name="model">
+                                <comboitem label="@load(each.libelle)"/>
+                            </template>
+                        </combobox>
+                    </row>
+                    <row sclass="cellLayoutNoBorder">
+                        <cell colspan="4" align="right">
+                            <button label="Effacer" iconSclass="z-icon-eraser" onClick="@command('clearForm')" style="margin-right: 10px"/>
+                            <button label="Rechercher" iconSclass="z-icon-search" onClick="@command('search')"/>
+                        </cell>
+                    </row>
+                </rows>
+            </grid>
+            <separator bar="true" style="margin: 20px"/>
+
+            <listbox model="@bind(vmRecherche.searchResults)"
+                     mold="paging" pageSize="@load(vmRecherche.pageSize)" emptyMessage="Aucun résultat ne correspond à vos critères de recherche.">
+                <auxhead>
+                    <auxheader colspan="6">Résultats</auxheader>
+                </auxhead>
+                <listhead>
+                    <listheader hflex="1" label="Référence" align="center"/>
+                    <listheader hflex="1" label="Date de saisie" align="center"/>
+                    <listheader hflex="1" label="Agent de saisie" align="left"/>
+                    <listheader hflex="1" label="Nature des faits" align="left"/>
+                    <listheader hflex="1" label="Quartier" align="left"/>
+                    <listheader hflex="1" label="Action" align="center"/>
+                </listhead>
+                <template name="model" var="f">
+                    <listitem>
+                        <listcell label="@load(f.reference)"/>
+                        <listcell label="@load(f.dateSaisie) @converter('formatedDate',format='dd/MM/yyyy HH:mm')"/>
+                        <listcell label="@load(f.agentSaisie)"/>
+                        <listcell label="@load(f.natureFaits)"/>
+                        <listcell label="@load(f.quartier)"/>
+                        <listcell>
+                            <button label="" iconSclass="z-icon-search" visible="@load(not f.canEdit)" onClick="@global-command('openFiche', idFiche=f.idFiche)"/>
+                            <button label="" iconSclass="z-icon-pencil" visible="@load(f.canEdit)" onClick="@global-command('openFiche', idFiche=f.idFiche)"/>
+                        </listcell>
+                    </listitem>
+                </template>
+
+            </listbox>
+
+        </vbox>
+    </window>
+</zk>

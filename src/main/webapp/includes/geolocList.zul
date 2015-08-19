@@ -1,0 +1,69 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <panel border="normal"
+           apply="org.zkoss.bind.BindComposer"
+           viewModel="@id('vmGeoloc') @init('nc.noumea.mairie.dpmmc.viewModel.GeolocViewModel')">
+        <caption width="100%">
+            <div width="100%">
+                <label value="Géolocalisaton" style="float:left;"/>
+                <label value="@bind(vmGeoloc.lastRefreshDate)  @converter('formatedDate',format='dd/MM/yyyy HH:mm:ss')"
+                       style="float:right;"/>
+            </div>
+        </caption>
+        <panelchildren>
+            <listbox id="list" model="@bind(vmGeoloc.awaitingGeolocs)" hflex="1">
+                <template name="model" var="g">
+                    <listitem onDoubleClick="@global-command('newFiche', geolocFiche=g)" >
+                        <listcell>
+                            <div style="padding: 5px;">
+                                <div>
+                                    <image src="/img/car_vehicle.png" style=" float: left; margin-top: 2px;" draggable="true"/>
+                                    <div style="float: left; margin-left: 27px;">
+                                        <label value="@load(g.gdhAppel) @converter('formatedDate',format='dd/MM/yyyy HH:mm')"
+                                               style="font-weight: bold;"/>
+                                    </div>
+                                    <div style="float: right;">
+                                        <image src="/img/delete.gif" style=" float: left; margin-top: 2px;" onClick="@command('removeFromList', geolocFiche=g)"/>
+                                    </div>
+                                    <div style="clear: both; height: 4px"></div>
+                                    <div forEach="${g.erreurs}" style="font-size: small; color: red">
+                                        <h:i class="z-icon-warning"/>
+                                        <label value="${each}"/>
+                                    </div>
+                                    <div>
+                                        <div style="clear: both; height: 7px"></div>
+                                        <div>
+                                            <label value="VP"
+                                                   style="font-weight: bold; font-style: italic; float: left; width: 60px;"/>
+                                            <label value="@load(g.vp)" style="float: left;"/>
+                                        </div>
+                                        <div style="clear: both; height: 7px"></div>
+                                        <div>
+                                            <label value="Agents"
+                                                   style="font-weight: bold; font-style: italic; float: left; width: 60px;"/>
+                                            <label value="@load(g.agents)" multiline="true"
+                                                   style="float: left; max-width: 150px;"/>
+                                        </div>
+                                        <div style="clear: both; height: 7px"></div>
+                                        <div>
+                                            <label value="Adresse"
+                                                   style="font-weight: bold; font-style: italic; float: left; width: 60px;"/>
+                                            <label value="@load(g.adresse)" multiline="true"
+                                                   style="float: left; max-width: 150px;"/>
+                                        </div>
+                                        <div style="clear: both;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <timer id="timer" delay="5000" repeats="true" onTimer="@command('refreshList')">
+            </timer>
+        </panelchildren>
+    </panel>
+</zk>

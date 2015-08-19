@@ -1,0 +1,25 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <vlayout apply="org.zkoss.bind.BindComposer"
+             viewModel="@id('vm') @init('nc.noumea.mairie.dpmmc.viewModel.admin.AdresseImportViewModel')">
+        <hbox>
+            <label value="Dernier chargement : "/>
+            <label value="---"/>
+        </hbox>
+        <hbox>
+            <label value="Mettre à jour les adresses en chargeant un nouveau fichier : "/>
+            <button upload="true" label="Choisissez un fichier ..." onUpload="@command('uploadAdresseFileCommand', event=event)"/>
+        </hbox>
+        <vbox>
+            <div forEach="${vm.errors}" style="font-size: small; color: red">
+                <h:i class="z-icon-warning"/>
+                <label value="${each}"/>
+            </div>
+        </vbox>
+
+    </vlayout>
+
+</zk>

@@ -1,0 +1,92 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+
+    <window id="editLieuPredefiniPopup"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vmLieuPredefini') @init('nc.noumea.mairie.dpmmc.viewModel.admin.LieuPredefiniEditViewModel', lieu=arg['lieu'], adresse=arg['adresse'], idFiche=arg['idFiche'])"
+            mode="modal" position="center,center" width="700px" height="160px" closable="true"
+            title="Editer l'adresse" border="normal"
+            action="show: slideDown;hide: slideUp"
+            onCancel="win.detach()">
+        <grid>
+            <columns>
+                <column/>
+                <column width="50px"/>
+                <column/>
+            </columns>
+            <rows>
+                <row>
+                    <cell colspan="3">
+                        <grid>
+                            <columns>
+                                <column hflex="1"/>
+                                <column hflex="2"/>
+                                <column hflex="1"/>
+                                <column hflex="2"/>
+                                <column hflex="1"/>
+                                <column hflex="2"/>
+                            </columns>
+                            <rows>
+                                <row>
+                                    <label value="Ville : "/>
+                                    <combobox hflex="1" model="@load(vmLieuPredefini.villes)"
+                                              selectedItem="@bind(vmLieuPredefini.selectedVille)"
+                                              onChange="@command('refreshAddressVille')">
+                                        <template name="model">
+                                            <comboitem label="@load(each.libelle)"/>
+                                        </template>
+                                    </combobox>
+                                    <label value="Secteur : "/>
+                                    <combobox hflex="1" model="@bind(vmLieuPredefini.secteurs)"
+                                              selectedItem="@bind(vmLieuPredefini.selectedSecteur)"
+                                              onChange="@command('refreshAddressSecteur')">
+                                        <template name="model">
+                                            <comboitem label="@load(each.libelle)"/>
+                                        </template>
+                                    </combobox>
+                                    <label value="Quartier : "/>
+                                    <combobox hflex="1" model="@bind(vmLieuPredefini.quartiers)"
+                                              selectedItem="@bind(vmLieuPredefini.selectedQuartier)"
+                                              onChange="@command('refreshAddressQuartier')">
+                                        <template name="model">
+                                            <comboitem label="@load(each.libelle)"/>
+                                        </template>
+                                    </combobox>
+                                </row>
+                                <row>
+                                    <label value="Voie :"/>
+                                    <cell colspan="5">
+                                        <combobox model="@bind(vmLieuPredefini.numeros)"
+                                                  width="60px" style="margin-right: 5px;"
+                                                  selectedItem="@bind(vmLieuPredefini.numero)">
+                                            <template name="model">
+                                                <comboitem label="@load(each)"/>
+                                            </template>
+                                        </combobox>
+                                        <combobox hflex="1" model="@bind(vmLieuPredefini.nomVoies)"
+                                                  selectedItem="@bind(vmLieuPredefini.selectedNomVoie)"
+                                                  onChange="@command('refreshAddressNomVoie')">
+                                            <template name="model">
+                                                <comboitem label="@load(each.libelle)"/>
+                                            </template>
+                                        </combobox>
+                                    </cell>
+                                </row>
+                                <row align="center">
+                                    <cell colspan="6">
+                                        <button label="Annuler" onClick="editLieuPredefiniPopup.detach()"
+                                                style="margin-right: 5px"/>
+                                        <button label="Sauver" onClick="@command('save', win=editLieuPredefiniPopup)"
+                                                style="margin-left: 5px"/>
+                                    </cell>
+                                </row>
+                            </rows>
+                        </grid>
+                    </cell>
+                </row>
+            </rows>
+        </grid>
+    </window>
+</zk>
