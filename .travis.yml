@@ -15,5 +15,7 @@ env:
 script:
   - mvn test jacoco:report
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report 
+  - mvn clean cobertura:cobertura coveralls:report
+notifications:
+  slack: dsi-mairie-noumea:FNajFtq1Vt1LnPsB331QciTf
 
