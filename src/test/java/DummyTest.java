@@ -9,14 +9,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * (very) dummy test class to workaround jacoco bug.
  */
 
 /**
  *
- * @author salad74
+ * @author adriens
  */
 public class DummyTest {
      private Collection collection;
