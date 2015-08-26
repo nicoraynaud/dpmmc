@@ -20,6 +20,9 @@
         <coveralls-maven-plugin.version>3.2.0</coveralls-maven-plugin.version>
         <jacoco-maven-plugin.version>0.7.2.201409121644</jacoco-maven-plugin.version>
         <maven-site-plugin.version>3.4</maven-site-plugin.version>
+        <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
+        
+        
     </properties>
     <packaging>war</packaging>
     <name>The dpmmc Project</name>
@@ -308,7 +311,7 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-javadoc-plugin</artifactId>
-                            <version>2.9.1</version>
+                            <version>${maven-javadoc-plugin.version}</version>
                         </plugin>
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
