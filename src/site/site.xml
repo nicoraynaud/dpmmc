@@ -3,7 +3,7 @@
         <name>DSI - Mairie de Nouméa - Gestion des Mains courantes de la Police Municipale</name>
         <alt>https://github.com/DSI-Ville-Noumea/dpmmc</alt>
     </bannerLeft>
-	
+    
     <publishDate position="right"/>
     <version position="right"/>
     <skin>
@@ -14,6 +14,7 @@
     <body> 
         <breadcrumbs>	
             <item name="Accueil" href="index.html" /> 
+            <item name="Police Municipale Ville de Nouméa" href="http://www.noumea.nc/prevention-et-securite/la-police-municipale" /> 
         </breadcrumbs>
         <menu ref="reports"/>
     </body>
