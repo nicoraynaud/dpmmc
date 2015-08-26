@@ -4,6 +4,7 @@
     <groupId>nc.noumea.mairie</groupId>
     <artifactId>dpmmc</artifactId>
     <version>8.1-SNAPSHOT</version>
+    <url>https://github.com/DSI-Ville-Noumea/dpmmc</url>
     <properties>
         <java.version>7</java.version>
         <zk.version>7.0.3</zk.version>
