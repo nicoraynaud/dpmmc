@@ -59,13 +59,7 @@
             <url>https://maven.zkoss.org/repo/zk/ee</url>
         </repository>
     </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>zkmaven</id>
-            <name>ZK Maven Plugin Repository</name>
-            <url>http://mavensync.zkoss.org/maven2/</url>
-        </pluginRepository>
-    </pluginRepositories>
+    
     <dependencies>
 
         <!-- General dependencies for standard applications -->
@@ -357,11 +351,6 @@
                             </configuration>
                         </plugin>
                         <plugin>
-                            <groupId>org.codehaus.mojo</groupId>
-                            <artifactId>taglist-maven-plugin</artifactId>
-                            <version>${taglist-maven-plugin.version}</version>
-                        </plugin>
-                        <plugin>
                             <groupId>org.apache.maven.plugins</groupId> 
                             <artifactId>maven-changelog-plugin</artifactId> 
                             <version>${maven-changelog-plugin.version}</version> 
@@ -481,11 +470,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>${maven-jxr-plugin.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>taglist-maven-plugin</artifactId>
-                <version>${taglist-maven-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
