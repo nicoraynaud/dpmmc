@@ -17,6 +17,7 @@
         <!-- Build properties -->
         <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
         <maven-war-plugin.version>2.6</maven-war-plugin.version>
+        <coveralls-maven-plugin.version>3.2.0</coveralls-maven-plugin.version>
     </properties>
     <packaging>war</packaging>
     <name>The dpmmc Project</name>
@@ -276,7 +277,7 @@
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>${coveralls-maven-plugin.version}</version>
                 <configuration>
                     <repoToken>jExVATjqcdWQ86fllYZNt8l30To7yfvCQ</repoToken>
                 </configuration>
