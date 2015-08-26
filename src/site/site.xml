@@ -17,10 +17,6 @@
 			<item href="http://was.site-mairie.noumea.nc/dpmmcRecette/home.seam" name="URL DPMMC Recette" />
 			<item href="#" name="URL DPMMC Prod" />
 		</breadcrumbs>
-		
-		<menu name="Exploitation">
-        	<item name="WebApp Context" href="exploitation/context.html"/>
-        </menu>
         <menu ref="reports"/>
     </body>
 </project>
