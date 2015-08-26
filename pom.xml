@@ -426,7 +426,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.8</version>
+                <version>${maven-project-info-reports-plugin.version}</version>
                 <configuration>
                     <webAccessUrl>https://github.com/DSI-Ville-Noumea/dpmmc</webAccessUrl>
                     <anonymousConnection>scm:git:git://github.com/DSI-Ville-Noumea/dpmmc.git</anonymousConnection>
