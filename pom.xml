@@ -31,8 +31,6 @@
         <maven-pmd-plugin.version>3.5</maven-pmd-plugin.version>
         <maven-clean-plugin.version>2.6.1</maven-clean-plugin.version>
         <findbugs-maven-plugin.version>3.0.2</findbugs-maven-plugin.version>
-        
-        
     </properties>
     <packaging>war</packaging>
     <name>The dpmmc Project</name>
@@ -507,7 +505,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.4</version>
+                <version>${maven-pmd-plugin.version}</version>
             </plugin>
         </plugins>
                 
