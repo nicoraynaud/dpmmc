@@ -14,7 +14,9 @@
         <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.12</junit.version>
+        <!-- Build properties -->
         <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+        <maven-war-plugin.version>2.6</maven-war-plugin.version>
     </properties>
     <packaging>war</packaging>
     <name>The dpmmc Project</name>
@@ -255,7 +257,7 @@
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <groupId>org.apache.maven.plugins</groupId>
-                <version>2.2</version>
+                <version>${maven-war-plugin.version}</version>
                 <configuration>
                     <webResources>
                         <resource>
