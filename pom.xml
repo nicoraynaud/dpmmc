@@ -50,18 +50,35 @@
     </scm>
     
     <developers>
-		<developer>
-			<email>Nicolas.Raynaud@alphalog.nc</email>
-			<id>naryanaud</id>
-			<name>Nicolas Raynaud</name>
-			<organization>Alhpalog.nc</organization>
-			<organizationUrl>http://alphalog.nc/</organizationUrl>
-			<roles>
-				<role>Main Developer</role>
-			</roles>
-			<timezone>+11</timezone>
-		</developer>
-	</developers>
+        <developer>
+            <email>Nicolas.Raynaud@alphalog.nc</email>
+            <id>naryanaud</id>
+            <name>Nicolas Raynaud</name>
+            <organization>Alhpalog.nc</organization>
+            <organizationUrl>http://alphalog.nc/</organizationUrl>
+            <roles>
+                <role>Main Developer</role>
+            </roles>
+            <timezone>+11</timezone>
+        </developer>
+    </developers>
+    
+    <contributors>
+        <contributor>
+            <email>Adrien.Sales@ville-noumea.nc</email>
+            <name>Sales</name>
+            <organization>Mairie de Nouméa</organization>
+            <organizationUrl>https://github.com/DSI-Ville-Noumea</organizationUrl>
+            <roles>
+                <role>DBA</role>
+                <role>Documentation contributor</role>
+                <role>Tester</role>
+                <role>PostgreSQL expert</role>
+                <role>Project manager</role>
+            </roles>
+            <timezone>+11</timezone>
+        </contributor>
+    </contributors>
 
     <repositories>
         <repository>
