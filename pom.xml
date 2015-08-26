@@ -47,7 +47,21 @@
         <connection>scm:git:git://github.com/DSI-Ville-Noumea/dpmmc.git</connection>
         <developerConnection>scm:git:git@github.com:DSI-Ville-Noumea/dpmmc.git</developerConnection>
         <url>https://github.com/DSI-Ville-Noumea/dpmmc</url>
-    </scm> 
+    </scm>
+    
+    <developers>
+		<developer>
+			<email>Nicolas.Raynaud@alphalog.nc</email>
+			<id>naryanaud</id>
+			<name>Nicolas Raynaud</name>
+			<organization>Alhpalog.nc</organization>
+			<organizationUrl>http://alphalog.nc/</organizationUrl>
+			<roles>
+				<role>Main Developer</role>
+			</roles>
+			<timezone>+11</timezone>
+		</developer>
+	</developers>
 
     <repositories>
         <repository>
