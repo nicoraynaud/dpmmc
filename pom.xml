@@ -19,6 +19,7 @@
         <maven-war-plugin.version>2.6</maven-war-plugin.version>
         <coveralls-maven-plugin.version>3.2.0</coveralls-maven-plugin.version>
         <jacoco-maven-plugin.version>0.7.2.201409121644</jacoco-maven-plugin.version>
+        <maven-site-plugin.version>3.4</maven-site-plugin.version>
     </properties>
     <packaging>war</packaging>
     <name>The dpmmc Project</name>
@@ -301,7 +302,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.4</version>
+                <version>${maven-site-plugin.version}</version>
                 <configuration>
                     <reportPlugins>
                         <plugin>
