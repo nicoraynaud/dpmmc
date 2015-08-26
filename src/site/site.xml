@@ -1,7 +1,7 @@
-<project name="ADS">	
+<project name="DPMMC">	
     <bannerLeft>
-        <name>DSI - Mairie de Nouméa - Arbre des Services</name>
-        <alt>http://svpsp/dsi/Pages/Accueil.aspx</alt>
+        <name>DSI - Mairie de Nouméa - Gestion des Mains courantes de la Police Municipale</name>
+        <alt>https://github.com/DSI-Ville-Noumea/dpmmc</alt>
     </bannerLeft>
 	
     <publishDate position="right"/>
