@@ -377,7 +377,6 @@
                             <artifactId>maven-pmd-plugin</artifactId>
                             <version>${maven-pmd-plugin.version}</version>
                         </plugin>
-
                     </reportPlugins>
                 </configuration>
             </plugin>
