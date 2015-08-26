@@ -21,6 +21,7 @@
         <jacoco-maven-plugin.version>0.7.2.201409121644</jacoco-maven-plugin.version>
         <maven-site-plugin.version>3.4</maven-site-plugin.version>
         <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
+        <maven-jxr-plugin.version>2.5</maven-jxr-plugin.version>
         
         
     </properties>
@@ -316,7 +317,7 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-jxr-plugin</artifactId>
-                            <version>2.3</version>
+                            <version>${maven-jxr-plugin.version}</version>
                             <configuration>
                                 <aggregate>true</aggregate>
                             </configuration>
