@@ -14,8 +14,6 @@
     <body> 
 		<breadcrumbs>	
 			<item name="Accueil" href="index.html" /> 
-			<item href="http://was.site-mairie.noumea.nc/dpmmcRecette/home.seam" name="URL DPMMC Recette" />
-			<item href="#" name="URL DPMMC Prod" />
 		</breadcrumbs>
         <menu ref="reports"/>
     </body>
