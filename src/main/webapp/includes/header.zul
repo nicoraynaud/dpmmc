@@ -7,7 +7,7 @@
     <div align="center" sclass="header-div">
         <image sclass="header-mairie-logo" src="/img/logo_mairie.png"/>
         <div sclass="user-info-div">
-            <label style="margin-left: 5px" value="${sec:getUser()} ("/><h:a href="j_spring_security_logout">Déconnexion</h:a><label value=")"/>
+            <label style="margin-left: 5px" value="${sec:getUser()} ("/><h:a href="logout">Déconnexion</h:a><label value=")"/>
         </div>
         <div sclass="header-title-div">
             <div><label sclass="header-title1" value="Logiciel de gestion des mains courantes"/></div>
