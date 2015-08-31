@@ -7,7 +7,7 @@
     <url>https://github.com/DSI-Ville-Noumea/dpmmc</url>
     <properties>
         <java.version>7</java.version>
-        <zk.version>7.0.3</zk.version>
+        <zk.version>7.0.6</zk.version>
         <spring.version>4.2.0.RELEASE</spring.version>
         <spring.security.version>3.2.5.RELEASE</spring.security.version>
         <spring.ldap.version>2.0.3.RELEASE</spring.ldap.version>
@@ -58,7 +58,7 @@
     <developers>
         <developer>
             <email>Nicolas.Raynaud@alphalog.nc</email>
-            <id>naryanaud</id>
+            <id>nico_raynaud</id>
             <name>Nicolas Raynaud</name>
             <organization>Alhpalog.nc</organization>
             <organizationUrl>http://alphalog.nc/</organizationUrl>
