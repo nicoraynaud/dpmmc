@@ -8,11 +8,13 @@
     <properties>
         <java.version>7</java.version>
         <zk.version>7.0.3</zk.version>
-        <spring.version>4.1.2.RELEASE</spring.version>
+        <spring.version>4.2.0.RELEASE</spring.version>
         <spring.security.version>4.0.2.RELEASE</spring.security.version>
+        <spring.ldap.version>2.0.3.RELEASE</spring.ldap.version>
         <hibernate.version>4.3.7.Final</hibernate.version>
         <slf4j.version>1.7.6</slf4j.version>
         <commons-io>2.4</commons-io>
+        <commons-lang>2.6</commons-lang>
         <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.12</junit.version>
@@ -153,12 +155,6 @@
             <version>${zk.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons-io}</version>
-        </dependency>
-
         <!-- spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -228,32 +224,22 @@
             <artifactId>joda-time</artifactId>
             <version>2.5</version>
         </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io}</version>
+        </dependency>
 
         <!-- Spring ldap -->
         <dependency>
             <groupId>org.springframework.ldap</groupId>
             <artifactId>spring-ldap-core</artifactId>
-            <version>2.0.2.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ldap</groupId>
-            <artifactId>spring-ldap-core-tiger</artifactId>
-            <version>2.0.2.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ldap</groupId>
-            <artifactId>spring-ldap-odm</artifactId>
-            <version>2.0.2.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ldap</groupId>
-            <artifactId>spring-ldap-ldif-core</artifactId>
-            <version>2.0.2.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ldap</groupId>
-            <artifactId>spring-ldap-ldif-batch</artifactId>
-            <version>2.0.2.RELEASE</version>
+            <version>${spring.ldap.version}</version>
         </dependency>
 
         <!-- iText library -->
