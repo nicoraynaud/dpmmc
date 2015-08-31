@@ -9,7 +9,7 @@
         <java.version>7</java.version>
         <zk.version>7.0.6</zk.version>
         <spring.version>4.2.0.RELEASE</spring.version>
-        <spring.security.version>3.2.5.RELEASE</spring.security.version>
+        <spring.security.version>4.0.2.RELEASE</spring.security.version>
         <spring.ldap.version>2.0.3.RELEASE</spring.ldap.version>
         <hibernate.version>4.3.7.Final</hibernate.version>
         <slf4j.version>1.7.12</slf4j.version>

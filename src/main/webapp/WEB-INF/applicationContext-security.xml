@@ -5,12 +5,12 @@
              xmlns:context="http://www.springframework.org/schema/context"
              xmlns:jee="http://www.springframework.org/schema/jee"
              xsi:schemaLocation="
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
-		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.1.xsd">
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd">
 
 
-    <http auto-config="true">
+    <http auto-config="true" use-expressions="false" disable-url-rewriting="false">
         <port-mappings>
             <port-mapping http="8080" https="8443"/>
         </port-mappings>
@@ -31,11 +31,11 @@
         <form-login login-page="/login.zul"
                     authentication-failure-url="/login.zul?login_error=1"
                     default-target-url="/index.zul"
-                    always-use-default-target="true"
-                    login-processing-url="/j_spring_security_check"/>
+                    always-use-default-target="true"/>
 
         <logout logout-success-url="/login.zul" invalidate-session="true" />
         <access-denied-handler error-page="/login.zul?denied=1"/>
+        <csrf disabled="true" />
     </http>
 
     <global-method-security secured-annotations="enabled" />
@@ -46,9 +46,9 @@
 
     <!-- Mock authentication provider -->
     <!--<beans:bean id="mockAuthProvider" class="nc.noumea.mairie.dpmmc.security.MockAuthenticationProvider">-->
-    <!--<beans:constructor-arg name="authoritiesPopulator">-->
-    <!--<beans:bean class="nc.noumea.mairie.dpmmc.security.DpmmcAuthoritiesPopulator"/>-->
-    <!--</beans:constructor-arg>-->
+        <!--<beans:constructor-arg name="authoritiesPopulator">-->
+            <!--<beans:bean class="nc.noumea.mairie.dpmmc.security.DpmmcAuthoritiesPopulator"/>-->
+        <!--</beans:constructor-arg>-->
     <!--</beans:bean>-->
 
     <!-- LDAP authentication provider -->

@@ -33,7 +33,7 @@
                 </html>
 
 
-                <h:form id="f" name="f" action="j_spring_security_check" method="POST"
+                <h:form id="f" name="f" action="login" method="POST"
                         xmlns:h="http://www.w3.org/1999/xhtml">
                     <grid>
                         <columns>
@@ -47,10 +47,10 @@
                                     <image sclass="login-mairie-logo" src="img/logo_police_nc.jpg"/>
                                 </cell>
                                 Identifiant:
-                                <textbox id="u" name="j_username" hflex="1"/>
+                                <textbox id="u" name="username" hflex="1"/>
                             </row>
                             <row>Mot de passe:
-                                <textbox id="p" type="password" name="j_password" hflex="1"/>
+                                <textbox id="p" type="password" name="password" hflex="1"/>
                             </row>
                             <row align="center">
                                 <cell colspan="2">
