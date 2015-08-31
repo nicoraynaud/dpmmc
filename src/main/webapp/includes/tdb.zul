@@ -62,6 +62,8 @@
 
         </listbox>
 
+        <timer id="timerTdb" delay="10000" repeats="true" onTimer="@command('refreshLists')">
+        </timer>
 
     </window>
 
