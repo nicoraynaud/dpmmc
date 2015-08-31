@@ -9,6 +9,7 @@
         <java.version>7</java.version>
         <zk.version>7.0.3</zk.version>
         <spring.version>4.1.2.RELEASE</spring.version>
+        <spring.security.version>4.0.2.RELEASE</spring.security.version>
         <hibernate.version>4.3.7.Final</hibernate.version>
         <slf4j.version>1.7.6</slf4j.version>
         <commons-io>2.4</commons-io>
@@ -81,6 +82,10 @@
     </contributors>
 
     <repositories>
+        <repository>
+            <id>mvn repository</id>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
         <repository>
             <id>ZK CE</id>
             <name>ZK CE Repository</name>
@@ -197,22 +202,22 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>3.2.5.RELEASE</version>
+            <version>${spring.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>3.2.5.RELEASE</version>
+            <version>${spring.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>3.2.5.RELEASE</version>
+            <version>${spring.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-ldap</artifactId>
-            <version>3.2.5.RELEASE</version>
+            <version>${spring.security.version}</version>
         </dependency>
 
         <!-- JPA(Hibernate) and HSQL dependencies -->
