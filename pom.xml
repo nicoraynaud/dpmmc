@@ -16,6 +16,7 @@
         <commons-io>2.4</commons-io>
         <commons-lang>2.6</commons-lang>
         <joda-time>2.8.2</joda-time>
+        <itext>5.5.6</itext>
         <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.12</junit.version>
@@ -247,7 +248,7 @@
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
-            <version>5.5.5</version>
+            <version>${itext}</version>
         </dependency>
 
         <!-- ZK 5 breeze theme
