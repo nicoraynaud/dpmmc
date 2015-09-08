@@ -295,7 +295,10 @@ public class FicheViewModel {
     @Command
     @NotifyChange({"*", "fiche"})
     public void delete() {
-        Executions.createComponents("includes/deleteFicheConfirmationPopup.zul", null, null);
+        Map<String, Object> args = new HashMap<>();
+        args.put("ficheId", this.getFiche().getFiche().getId());
+
+        Executions.createComponents("includes/deleteFicheConfirmationPopup.zul", null, args);
     }
 
     @NotifyChange({"*", "fiche"})
