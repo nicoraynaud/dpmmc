@@ -17,7 +17,7 @@
 	<!--  -->	
 	<Resource name="jdbc/DPMMC_DS1" auth="Container" type="javax.sql.DataSource"
 		maxActive="100" maxIdle="30" minIdle="0" validationQuery="select 1"
-		maxWait="10000" initialSize="1" username="dpmmc" password="dpmmc"
+		maxWait="10000" initialSize="1" username="xxxxx" password="xxxxx"
 		driverClassName="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/dpmmc"
 		poolPreparedStatements="true" />
 
@@ -36,11 +36,11 @@
                  override="false" />
     <Environment name="ad/userBase" type="java.lang.String"
                  description="Read-only user Dn for DPMMC application"
-                 value="cn=adminwas,ou=was,ou=appli,ou=z-users,dc=site-mairie,dc=noumea,dc=nc"
+                 value="cn=xxxxx,ou=was,ou=appli,ou=z-users,dc=site-mairie,dc=noumea,dc=nc"
                  override="false" />
     <Environment name="ad/userPassword" type="java.lang.String"
                  description="Password for the above defined ldap user"
-                 value="planet"
+                 value="xxxxx"
                  override="false" />
 
 </Context>
