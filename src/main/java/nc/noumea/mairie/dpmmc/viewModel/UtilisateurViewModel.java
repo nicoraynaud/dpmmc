@@ -54,7 +54,7 @@ public class UtilisateurViewModel {
         Agent a = new Agent();
         u.setAgent(a);
         u.setIdentifiant("Nouveau user #" + (utilisateurs.getSize() + 1));
-        ((ListModelList) utilisateurs).add(0, u);
+        updateUtilisateur(u);
     }
 
     @Command
@@ -77,7 +77,10 @@ public class UtilisateurViewModel {
     }
 
     @GlobalCommand
-    public void updateUtilisateurDoneCommand(@BindingParam("utilisateur") Utilisateur utilisateur) {
+    public void updateUtilisateurDoneCommand(@BindingParam("utilisateur") Utilisateur utilisateur, @BindingParam("isNew") Boolean isNew) {
+        if (isNew)
+            ((ListModelList) utilisateurs).add(0, utilisateur);
+
         BindUtils.postNotifyChange(null, null, utilisateur, ".");
     }
 

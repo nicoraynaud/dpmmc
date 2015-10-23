@@ -131,12 +131,25 @@ public class UtilisateurPopupViewModel {
         utilisateur.getAgent().setNom(newNom);
         utilisateur.getAgent().setPrenom(newPrenom);
 
-        Utilisateur u = utilisateurService.save(utilisateur);
-        utilisateur.setId(u.getId());
+        boolean wasNew = false;
+        try {
+            Utilisateur u = utilisateurService.save(utilisateur);
+            wasNew = (utilisateur.getId() == null || utilisateur.getId() == 0);
+            utilisateur.setId(u.getId());
+        } catch (Exception ex) {
+            if (ex.getCause() != null && ex.getCause().toString().contains("ConstraintViolationException")) {
+                Messagebox.show("L'identifiant que vous avez saisi est déjà utilisé.",
+                        "Erreur de sauvegarde", Messagebox.OK, Messagebox.ERROR);
+                return;
+            } else {
+                throw new RuntimeException("Erreur lors de la sauvegarde, veuillez contacter votre administrateur.", ex);
+            }
+        }
 
         x.detach();
         Map<String, Object> args = new HashMap<>();
         args.put("utilisateur", utilisateur);
+        args.put("isNew", wasNew);
         BindUtils.postGlobalCommand(null, null, "updateUtilisateurDoneCommand", args);
 
         Clients.showNotification("L'utilisateur a été mis à jour avec succès.", "info", null, "bottom_right", 1500);
@@ -145,7 +158,7 @@ public class UtilisateurPopupViewModel {
     private boolean isDataValid() {
 
         if (StringUtils.isBlank(newIdentifiant)
-                || newMatricule == 0
+                || newMatricule == null || newMatricule == 0
                 || StringUtils.isBlank(newNom)
                 || StringUtils.isBlank(newPrenom)
                 || newProfil == null)
