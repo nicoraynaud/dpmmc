@@ -1,0 +1,66 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+    <window id="updateUtilisateurPopup"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vmUtilisateur') @init('nc.noumea.mairie.dpmmc.viewModel.UtilisateurPopupViewModel', utilisateur=arg['utilisateur'])"
+            mode="modal" position="center,center" width="500px" height="285px" closable="true"
+            title="Modifier un utilisateur" border="normal"
+            action="show: slideDown;hide: slideUp"
+            onCancel="win.detach()">
+
+        <vbox vflex="1">
+
+            <grid hflex="1">
+                <columns>
+                    <column hflex="1"></column>
+                    <column hflex="2"></column>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="Identifiant (requis)"/>
+                        <textbox
+                                 value="@bind(vmUtilisateur.utilisateur.identifiant)" constraint="no empty: Champ requis" />
+                    </row>
+                    <row>
+                        <label value="Matricule (requis)"/>
+                        <textbox
+                                 value="@bind(vmUtilisateur.utilisateur.agent.matricule)" constraint="/[0-9]+/: Champ requis (entier)"/>
+                    </row>
+                    <row>
+                        <label value="Nom (requis)"/>
+                        <textbox
+                                 value="@bind(vmUtilisateur.utilisateur.agent.nom)" constraint="no empty: Champ requis"/>
+                    </row>
+                    <row>
+                        <label value="Prénom (requis)"/>
+                        <textbox
+                                 value="@bind(vmUtilisateur.utilisateur.agent.prenom)" constraint="no empty: Champ requis"/>
+                    </row>
+                    <row>
+                        <label value="Profil (requis)"/>
+                        <combobox constraint="no empty: Champ requis"
+                                  model="@load(vmUtilisateur.profils)" selectedItem="@bind(vmUtilisateur.utilisateur.profil)" hflex="1" value="@load(vmUtilisateur.utilisateur.profil.nom)">
+                            <template name="model">
+                                <comboitem label="@load(each.nom)" value="@bind(each)"/>
+                            </template>
+                        </combobox>
+                    </row>
+                    <row>
+                        <label value="Actif"/>
+                        <checkbox checked="@bind(vmUtilisateur.utilisateur.actif)" />
+                    </row>
+                </rows>
+            </grid>
+
+            <hbox hflex="1" pack="center" align="center">
+                <button label="Annuler" onClick="updateUtilisateurPopup.detach()" style="margin-right: 5px"/>
+                <button label="Sauver" onClick="@command('save', win=updateUtilisateurPopup)"
+                        style="margin-left: 5px"/>
+            </hbox>
+
+        </vbox>
+    </window>
+</zk>
