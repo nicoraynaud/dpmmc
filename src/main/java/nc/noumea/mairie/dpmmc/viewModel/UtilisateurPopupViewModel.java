@@ -44,9 +44,74 @@ public class UtilisateurPopupViewModel {
         return profils;
     }
 
+    private String newIdentifiant;
+    private Profil newProfil;
+    private boolean newActif;
+    private String newNom;
+    private String newPrenom;
+    private Integer newMatricule;
+
+    public String getNewIdentifiant() {
+        return newIdentifiant;
+    }
+
+    public void setNewIdentifiant(String newIdentifiant) {
+        this.newIdentifiant = newIdentifiant;
+    }
+
+    public Profil getNewProfil() {
+        return newProfil;
+    }
+
+    public void setNewProfil(Profil newProfil) {
+        this.newProfil = newProfil;
+    }
+
+    public boolean isNewActif() {
+        return newActif;
+    }
+
+    public void setNewActif(boolean newActif) {
+        this.newActif = newActif;
+    }
+
+    public String getNewNom() {
+        return newNom;
+    }
+
+    public void setNewNom(String newNom) {
+        this.newNom = newNom;
+    }
+
+    public String getNewPrenom() {
+        return newPrenom;
+    }
+
+    public void setNewPrenom(String newPrenom) {
+        this.newPrenom = newPrenom;
+    }
+
+    public Integer getNewMatricule() {
+        return newMatricule;
+    }
+
+    public void setNewMatricule(Integer newMatricule) {
+        this.newMatricule = newMatricule;
+    }
+
     @Init
+    @NotifyChange({"newIdentifiant", "newActif", "newProfil", "newMatricule", "newNom", "newPrenom"})
     public void init(@BindingParam("utilisateur") Utilisateur utilisateurArg) {
         utilisateur = utilisateurArg;
+        newIdentifiant = utilisateurArg.getIdentifiant();
+        newActif = utilisateurArg.isActif();
+        newProfil = utilisateurArg.getProfil();
+        if (utilisateurArg.getAgent() != null) {
+            newMatricule = utilisateurArg.getAgent().getMatricule();
+            newNom = utilisateurArg.getAgent().getNom();
+            newPrenom = utilisateurArg.getAgent().getPrenom();
+        }
+
         profils = profilService.getAllProfils();
     }
 
@@ -58,6 +123,13 @@ public class UtilisateurPopupViewModel {
                     "Erreur de sauvegarde", Messagebox.OK, Messagebox.EXCLAMATION);
             return;
         }
+
+        utilisateur.setIdentifiant(newIdentifiant);
+        utilisateur.setActif(newActif);
+        utilisateur.setProfil(newProfil);
+        utilisateur.getAgent().setMatricule(newMatricule);
+        utilisateur.getAgent().setNom(newNom);
+        utilisateur.getAgent().setPrenom(newPrenom);
 
         Utilisateur u = utilisateurService.save(utilisateur);
         utilisateur.setId(u.getId());
@@ -72,11 +144,11 @@ public class UtilisateurPopupViewModel {
 
     private boolean isDataValid() {
 
-        if (StringUtils.isBlank(utilisateur.getIdentifiant())
-                || utilisateur.getAgent().getMatricule() == 0
-                || StringUtils.isBlank(utilisateur.getAgent().getNom())
-                || StringUtils.isBlank(utilisateur.getAgent().getPrenom())
-                || utilisateur.getProfil() == null)
+        if (StringUtils.isBlank(newIdentifiant)
+                || newMatricule == 0
+                || StringUtils.isBlank(newNom)
+                || StringUtils.isBlank(newPrenom)
+                || newProfil == null)
             return false;
 
         return true;

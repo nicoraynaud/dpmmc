@@ -6,6 +6,7 @@ import nc.noumea.mairie.dpmmc.domain.Rattachement;
 import nc.noumea.mairie.dpmmc.domain.Utilisateur;
 import nc.noumea.mairie.dpmmc.services.interfaces.IProfilService;
 import nc.noumea.mairie.dpmmc.services.interfaces.IUtilisateurService;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.*;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
@@ -77,7 +78,7 @@ public class UtilisateurViewModel {
 
     @GlobalCommand
     public void updateUtilisateurDoneCommand(@BindingParam("utilisateur") Utilisateur utilisateur) {
-
+        BindUtils.postNotifyChange(null, null, utilisateur, ".");
     }
 
 }
