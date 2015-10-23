@@ -6,6 +6,7 @@ import nc.noumea.mairie.dpmmc.domain.Rattachement;
 import nc.noumea.mairie.dpmmc.domain.Utilisateur;
 import nc.noumea.mairie.dpmmc.services.interfaces.IProfilService;
 import nc.noumea.mairie.dpmmc.services.interfaces.IUtilisateurService;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.*;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
@@ -33,17 +34,10 @@ public class UtilisateurViewModel {
         return utilisateurs;
     }
 
-    private List<Profil> profils;
-
-    public List<Profil> getProfils() {
-        return profils;
-    }
-
     @Init
     @NotifyChange({ "utilisateurs" })
     public void initLists() {
         utilisateurs = new ListModelList<Utilisateur>(utilisateurService.getAllUtilisateurs());
-        profils = profilService.getAllProfils();
     }
 
     @Command
@@ -59,7 +53,6 @@ public class UtilisateurViewModel {
         Utilisateur u = new Utilisateur();
         Agent a = new Agent();
         u.setAgent(a);
-        u.setProfil(profils.get(0));
         u.setIdentifiant("Nouveau user #" + (utilisateurs.getSize() + 1));
         ((ListModelList) utilisateurs).add(0, u);
     }
@@ -74,6 +67,18 @@ public class UtilisateurViewModel {
     @GlobalCommand
     public void updateUtilisateurRattachementsCommand(@BindingParam("utilisateur") Utilisateur utilisateur) {
         itemChanged(utilisateur);
+    }
+
+    @Command
+    public void updateUtilisateur(@BindingParam("item") Utilisateur utilisateur) {
+        Map<String, Object> args = new HashMap<>();
+        args.put("utilisateur", utilisateur);
+        Executions.createComponents("includes/utilisateurPopup.zul", null, args);
+    }
+
+    @GlobalCommand
+    public void updateUtilisateurDoneCommand(@BindingParam("utilisateur") Utilisateur utilisateur) {
+        BindUtils.postNotifyChange(null, null, utilisateur, ".");
     }
 
 }

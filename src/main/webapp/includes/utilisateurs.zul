@@ -22,25 +22,18 @@
                 <column label="Profil" />
                 <column label="Brigades" align="center"/>
                 <column label="Actif ?" align="center" />
+                <column label="Modifier" align="center" />
             </columns>
             <template name="model">
                 <row>
-                    <textbox inplace="true"
-                             value="@bind(each.identifiant)" width="99%" onChange="@command('itemChanged', item=each)" />
-                    <textbox inplace="true"
-                             value="@bind(each.agent.nom)" width="99%" onChange="@command('itemChanged', item=each)" />
-                    <textbox inplace="true"
-                             value="@bind(each.agent.prenom)" width="99%" onChange="@command('itemChanged', item=each)" />
-                    <textbox inplace="true"
-                             value="@bind(each.agent.matricule)" width="99%" onChange="@command('itemChanged', item=each)" />
-                    <combobox inplace="true" onChange="@command('itemChanged', item=each)"
-                              model="@load(vmUtilisateurs.profils)" selectedItem="@bind(each.profil)" hflex="1" value="@load(each.profil.nom)">
-                        <template name="model">
-                            <comboitem label="@load(each.nom)" value="@bind(each)"/>
-                        </template>
-                    </combobox>
-                    <button iconSclass="z-icon-pencil" onClick="@command('updateRattachements', item=each)"/>
-                    <checkbox checked="@bind(each.actif)" onCheck="@command('itemChanged', item=each)" />
+                    <label value="@load(each.identifiant)" />
+                    <label value="@load(each.agent.nom)" />
+                    <label value="@load(each.agent.prenom)" />
+                    <label value="@load(each.agent.matricule)" />
+                    <label value="@load(each.profil.nom)" />
+                    <button iconSclass="z-icon-pencil" onClick="@command('updateRattachements', item=each)" disabled="@bind(each.id eq null)"/>
+                    <checkbox checked="@load(each.actif)" disabled="true"/>
+                    <button iconSclass="z-icon-pencil" onClick="@command('updateUtilisateur', item=each)"/>
                 </row>
             </template>
         </grid>

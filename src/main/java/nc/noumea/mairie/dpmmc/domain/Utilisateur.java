@@ -16,7 +16,7 @@ public class Utilisateur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "IDENTIFIANT")
+    @Column(name = "IDENTIFIANT", unique = true)
     private String identifiant;
 
     @Column(name = "ACTIF")

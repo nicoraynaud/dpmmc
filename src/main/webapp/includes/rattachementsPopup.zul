@@ -8,7 +8,6 @@
             viewModel="@id('vmRattachement') @init('nc.noumea.mairie.dpmmc.viewModel.RattachementViewModel', utilisateur=arg['utilisateur'])"
             mode="modal" position="center,center" width="650px" height="350px" closable="true"
             title="Choisir les rattachements" border="normal"
-            action="show: slideDown;hide: slideUp"
             onCancel="win.detach()">
 
         <vbox vflex="1">
