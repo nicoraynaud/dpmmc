@@ -99,6 +99,13 @@ public class UtilisateurPopupViewModel {
         this.newMatricule = newMatricule;
     }
 
+    private String previousIdentifiant;
+    private Profil previousProfil;
+    private boolean previousActif;
+    private String previousNom;
+    private String previousPrenom;
+    private Integer previousMatricule;
+    
     @Init
     @NotifyChange({"newIdentifiant", "newActif", "newProfil", "newMatricule", "newNom", "newPrenom"})
     public void init(@BindingParam("utilisateur") Utilisateur utilisateurArg) {
@@ -110,6 +117,15 @@ public class UtilisateurPopupViewModel {
             newMatricule = utilisateurArg.getAgent().getMatricule();
             newNom = utilisateurArg.getAgent().getNom();
             newPrenom = utilisateurArg.getAgent().getPrenom();
+        }
+
+        previousIdentifiant = utilisateurArg.getIdentifiant();
+        previousActif = utilisateurArg.isActif();
+        previousProfil = utilisateurArg.getProfil();
+        if (utilisateurArg.getAgent() != null) {
+            previousMatricule = utilisateurArg.getAgent().getMatricule();
+            previousNom = utilisateurArg.getAgent().getNom();
+            previousPrenom = utilisateurArg.getAgent().getPrenom();
         }
 
         profils = profilService.getAllProfils();
@@ -140,6 +156,13 @@ public class UtilisateurPopupViewModel {
             if (ex.getCause() != null && ex.getCause().toString().contains("ConstraintViolationException")) {
                 Messagebox.show("L'identifiant que vous avez saisi est déjà utilisé.",
                         "Erreur de sauvegarde", Messagebox.OK, Messagebox.ERROR);
+                utilisateur.setIdentifiant(previousIdentifiant);
+                utilisateur.setActif(previousActif);
+                utilisateur.setProfil(previousProfil);
+                utilisateur.getAgent().setMatricule(previousMatricule);
+                utilisateur.getAgent().setNom(previousNom);
+                utilisateur.getAgent().setPrenom(previousPrenom);
+
                 return;
             } else {
                 throw new RuntimeException("Erreur lors de la sauvegarde, veuillez contacter votre administrateur.", ex);
