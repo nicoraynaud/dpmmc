@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>nc.noumea.mairie</groupId>
     <artifactId>dpmmc</artifactId>
-    <version>8.2-SNAPSHOT</version>
+    <version>8.2</version>
     <url>https://github.com/DSI-Ville-Noumea/dpmmc</url>
     <properties>
         <java.version>7</java.version>
