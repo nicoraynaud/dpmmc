@@ -41,7 +41,7 @@ public class GeolocService implements IGeolocService {
 
     @Override
     @Transactional
-    public List<GeolocFicheModel> updateAndGetAwaitingGeolocs() {
+    public void updateAwaitingGeolocs() {
 
         logger.info("Mise à jour de la liste des tickets de géoloc...");
 
@@ -70,8 +70,6 @@ public class GeolocService implements IGeolocService {
         if (newDateSaved) {
             maj.setDateDerniereMaj(lastSyncedData);
         }
-        // return latest Geolocs
-        return getAwaitingGeolocs();
     }
 
     @Override

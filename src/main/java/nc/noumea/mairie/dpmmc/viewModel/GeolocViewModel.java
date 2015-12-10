@@ -50,7 +50,7 @@ public class GeolocViewModel {
     public void refreshList() {
 
         awaitingGeolocs.clear();
-        awaitingGeolocs = geolocService.updateAndGetAwaitingGeolocs();
+        awaitingGeolocs = geolocService.getAwaitingGeolocs();
         lastRefreshDate = new Date();
     }
 }

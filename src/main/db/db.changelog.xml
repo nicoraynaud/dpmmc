@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!--
+        This changelog uses contexts to differentiate qual and prod env.
+        List of contexts :
+         - qual : for qual environement only
+         - prod : for production environment only
+         none : beware that not specifying the context when running the liquibase migration will execute ALL changelogs
+         ex : liquibase -contexts=qual update
+    -->
+
+    <!-- Create tables  -->
+    <include file="db.changelog-dpmmc-7.1-create-table.xml"/>
+	
+	<!-- Insert Data  -->
+	<!--<include file="db.changelog-dpmmc-7.1-import-data-qual.xml"/>-->
+
+    <!-- Change types  -->
+    <include file="db.changelog-dpmmc-7.1-alter-tables.xml"/>
+	
+    <!-- Create constraints  -->
+    <include file="db.changelog-dpmmc-7.1-enable-constraints.xml"/>
+
+    <!-- Post load -->
+    <include file="db.changelog-dpmmc-7.1-post-load.xml"/>
+
+    <!-- 7.3 add column-->
+    <include file="db.changelog-dpmmc-7.3-alter-tables.xml"/>
+
+    <!-- 7.5 drop not nul constraint -->
+    <include file="db.changelog-dpmmc-7.5-alter-tables.xml"/>
+
+    <!-- 7.6 alter tables -->
+    <include file="db.changelog-dpmmc-7.6-alter-tables.xml"/>
+
+    <!-- 7.8 update sequences -->
+    <include file="db.changelog-dpmmc-7.8-update-sequences.xml"/>
+
+    <!-- 8.1 alter data -->
+    <include file="db.changelog-dpmmc-8.1-alter-data.xml"/>
+
+    <!-- 8.2 alter data -->
+    <include file="db.changelog-dpmmc-8.2-alter-table.xml"/>
+
+    <!-- 9.0 create quartz table schema -->
+    <include file="db.changelog-dpmmc-9.0-create-quartz-tables.xml"/>
+
+    <!-- 9.1 create quartz job for Geoloc -->
+    <include file="db.changelog-dpmmc-9.0-insert-quartz-job.xml"/>
+
+</databaseChangeLog>

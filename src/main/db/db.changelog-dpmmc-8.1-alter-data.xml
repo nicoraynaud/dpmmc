@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <preConditions>
+        <dbms type="postgresql" />
+    </preConditions>
+
+    <changeSet author="rayni84" id="5e6dd516-e582-4b71-a94b-0c1d0c6ed875-1">
+        <sql splitStatements="false">create or replace function fix_duplicated_agents() returns integer as $$
+                declare
+                    m_rec RECORD;
+                    matricule integer := 0;
+                    id_agent_to_keep integer;
+                    updates integer := 0;
+                begin
+                    for m_rec in select aa.matricule from agents aa group by aa.matricule having count(aa.matricule) > 1 loop
+                        select min(id) into id_agent_to_keep from agents ac where ac.matricule = m_rec.matricule;
+                        update RATTACHEMENTS set id_agent = id_agent_to_keep where id_agent in (select ad.id from agents ad where ad.matricule = m_rec.matricule and ad.id != id_agent_to_keep);
+                        update UTILISATEURS set id_agent = id_agent_to_keep where id_agent in (select ad.id from agents ad where ad.matricule = m_rec.matricule and ad.id != id_agent_to_keep);
+                        update EQUIPAGES set id_agent = id_agent_to_keep where id_agent in (select ad.id from agents ad where ad.matricule = m_rec.matricule and ad.id != id_agent_to_keep);
+                        update EQUIPAGES_GEOLOCALISATIONS_VP set id_agent = id_agent_to_keep where id_agent in (select ad.id from agents ad where ad.matricule = m_rec.matricule and ad.id != id_agent_to_keep);
+                        update FICHES set ID_AGENT_INTERVENTION = id_agent_to_keep where ID_AGENT_INTERVENTION in (select ad.id from agents ad where ad.matricule = m_rec.matricule and ad.id != id_agent_to_keep);
+                        delete from agents a0 where a0.matricule = m_rec.matricule and a0.id != id_agent_to_keep;
+                        updates := updates + 1;
+                    end loop;
+                    return updates;
+                end;
+                $$ language plpgsql;
+
+            select * from fix_duplicated_agents();
+            drop function fix_duplicated_agents();</sql>
+    </changeSet>
+
+</databaseChangeLog>

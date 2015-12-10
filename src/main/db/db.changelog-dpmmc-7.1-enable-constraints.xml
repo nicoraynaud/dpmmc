@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="rayni84" id="1417670162732-67">
+        <addPrimaryKey columnNames="ID_PATROUILLE, ID_AGENT" constraintName="PK_EQUIPAGES" tableName="EQUIPAGES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-68">
+        <addPrimaryKey columnNames="ID_GEOLOCALISATION_VP, ID_AGENT" constraintName="PK_EQUIPAGES_GEOLOC" tableName="EQUIPAGES_GEOLOCALISATIONS_VP"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-69">
+        <addPrimaryKey columnNames="ID" constraintName="PK_ERREURS_GEOLOC" tableName="ERREURS_GEOLOCALISATIONS_VP"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-70">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023212" tableName="ADRESSES"/>
+        <addDefaultValue tableName="ADRESSES" columnName="ID" defaultValueSequenceNext="DPMMC_S_ADRESSES" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-71">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023214" tableName="AGENTS"/>
+        <addDefaultValue tableName="AGENTS" columnName="ID" defaultValueSequenceNext="DPMMC_S_AGENTS" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-72">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023219" tableName="ALERTES_RECIDIVES"/>
+        <addDefaultValue tableName="ALERTES_RECIDIVES" columnName="ID" defaultValueSequenceNext="DPMMC_S_ALERTES_RECIDIVES" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-73">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023223" tableName="APPELANTS"/>
+        <addDefaultValue tableName="APPELANTS" columnName="ID" defaultValueSequenceNext="DPMMC_S_APPELANTS" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-74">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023229" tableName="BRIGADES"/>
+        <addDefaultValue tableName="BRIGADES" columnName="ID" defaultValueSequenceNext="DPMMC_S_BRIGADES" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-75">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023235" tableName="CATEGORIES_FAIT"/>
+        <addDefaultValue tableName="CATEGORIES_FAIT" columnName="ID" defaultValueSequenceNext="DPMMC_S_CATEGORIES_FAIT" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-76">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023241" tableName="CATEGORIES_PERSONNE"/>
+        <addDefaultValue tableName="CATEGORIES_PERSONNE" columnName="ID" defaultValueSequenceNext="DPMMC_S_CATEGORIES_PERSONNE" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-77">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023247" tableName="CATEGORIES_PROCEDURE"/>
+        <addDefaultValue tableName="CATEGORIES_PROCEDURE" columnName="ID" defaultValueSequenceNext="DPMMC_S_CATEGORIES_PROCEDURE" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-78">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023253" tableName="CATEGORIES_SAISINE"/>
+        <addDefaultValue tableName="CATEGORIES_SAISINE" columnName="ID" defaultValueSequenceNext="DPMMC_S_CATEGORIES_SAISINE" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-79">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023259" tableName="CONTACTS_INTERPOLICE"/>
+        <addDefaultValue tableName="CONTACTS_INTERPOLICE" columnName="ID" defaultValueSequenceNext="DPMMC_S_CONTACTS_INTERPOLICE" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-80">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023274" tableName="FAITS"/>
+        <addDefaultValue tableName="FAITS" columnName="ID" defaultValueSequenceNext="DPMMC_S_FAITS" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-81">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023281" tableName="FICHES"/>
+        <addDefaultValue tableName="FICHES" columnName="ID" defaultValueSequenceNext="DPMMC_S_FICHES" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-82">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023284" tableName="GEOLOCALISATIONS_VP"/>
+        <addDefaultValue tableName="GEOLOCALISATIONS_VP" columnName="ID" defaultValueSequenceNext="DPMMC_S_GEOLOCALISATIONS_VP" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-83">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023296" tableName="INDICATIFS_RADIOS"/>
+        <addDefaultValue tableName="INDICATIFS_RADIOS" columnName="ID" defaultValueSequenceNext="DPMMC_S_INDICATIFS_RADIOS" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-84">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023303" tableName="LIEUX_PREDEFINIS"/>
+        <addDefaultValue tableName="LIEUX_PREDEFINIS" columnName="ID" defaultValueSequenceNext="DPMMC_S_LIEUX_PREDEFINIS" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-86">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023312" tableName="MAJ_GEOLOC"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-87">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023319" tableName="NATURES_FAIT"/>
+        <addDefaultValue tableName="NATURES_FAIT" columnName="ID" defaultValueSequenceNext="DPMMC_S_NATURES_FAIT" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-88">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023322" tableName="NOM_VOIES"/>
+        <addDefaultValue tableName="NOM_VOIES" columnName="ID" defaultValueSequenceNext="DPMMC_S_NOM_VOIES" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-89">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023327" tableName="PARAMETRES_APPLICATION"/>
+        <addDefaultValue tableName="PARAMETRES_APPLICATION" columnName="ID" defaultValueSequenceNext="DPMMC_S_PARAMETRES_APP" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-90">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023331" tableName="PATROUILLES"/>
+        <addDefaultValue tableName="PATROUILLES" columnName="ID" defaultValueSequenceNext="DPMMC_S_PATROUILLES" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-91">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023337" tableName="PERSONNES"/>
+        <addDefaultValue tableName="PERSONNES" columnName="ID" defaultValueSequenceNext="DPMMC_S_PERSONNES" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-92">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023342" tableName="PRE_FICHES"/>
+        <addDefaultValue tableName="PRE_FICHES" columnName="ID" defaultValueSequenceNext="DPMMC_S_PRE_FICHES" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-93">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023347" tableName="PROCEDURES"/>
+        <addDefaultValue tableName="PROCEDURES" columnName="ID" defaultValueSequenceNext="DPMMC_S_PROCEDURES" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-94">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023359" tableName="PROFILS"/>
+        <addDefaultValue tableName="PROFILS" columnName="ID" defaultValueSequenceNext="DPMMC_S_PROFILS" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-95">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023363" tableName="QUARTIERS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-96">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023369" tableName="RATTACHEMENTS"/>
+        <addDefaultValue tableName="RATTACHEMENTS" columnName="ID" defaultValueSequenceNext="DPMMC_S_RATTACHEMENTS" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-97">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023373" tableName="SECTEURS"/>
+        <addDefaultValue tableName="SECTEURS" columnName="ID" defaultValueSequenceNext="DPMMC_S_SECTEURS" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-98">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023379" tableName="UTILISATEURS"/>
+        <addDefaultValue tableName="UTILISATEURS" columnName="ID" defaultValueSequenceNext="DPMMC_S_UTILISATEURS" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-99">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023385" tableName="VEHICULES"/>
+        <addDefaultValue tableName="VEHICULES" columnName="ID" defaultValueSequenceNext="DPMMC_S_VEHICULES" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-100">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C0023388" tableName="VILLES"/>
+        <addDefaultValue tableName="VILLES" columnName="ID" defaultValueSequenceNext="DPMMC_S_VILLES" />
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-101">
+        <addForeignKeyConstraint baseColumnNames="ID_ADRESSE" baseTableName="LIEUX_PREDEFINIS" constraintName="ID_ADRESSE_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ADRESSES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-102">
+        <addForeignKeyConstraint baseColumnNames="ID_ADRESSE" baseTableName="FICHES" constraintName="ID_ADRESSE_FK_FICHES" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ADRESSES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-103">
+        <addForeignKeyConstraint baseColumnNames="ID_ADRESSE" baseTableName="GEOLOCALISATIONS_VP" constraintName="ID_ADRESSE_FK_GEOLOC" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ADRESSES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-104">
+        <addForeignKeyConstraint baseColumnNames="ID_AGENT" baseTableName="EQUIPAGES" constraintName="ID_AGENT_FK_EQUIPAGES" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="AGENTS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-105">
+        <addForeignKeyConstraint baseColumnNames="ID_AGENT" baseTableName="EQUIPAGES_GEOLOCALISATIONS_VP" constraintName="ID_AGENT_FK_EQUIPAGES_GEOLOC" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="AGENTS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-106">
+        <addForeignKeyConstraint baseColumnNames="ID_AGENT" baseTableName="RATTACHEMENTS" constraintName="ID_AGENT_FK_RATTACHEMENTS" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="AGENTS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-107">
+        <addForeignKeyConstraint baseColumnNames="ID_AGENT" baseTableName="UTILISATEURS" constraintName="ID_AGENT_FK_UTILISATEURS" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="AGENTS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-108">
+        <addForeignKeyConstraint baseColumnNames="ID_AGENT_INTERVENTION" baseTableName="FICHES" constraintName="ID_AGENT_INTERVENTION_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="AGENTS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-109">
+        <addForeignKeyConstraint baseColumnNames="ID_BRIGADE" baseTableName="INDICATIFS_RADIOS" constraintName="ID_BRIGADE_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="BRIGADES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-110">
+        <addForeignKeyConstraint baseColumnNames="ID_BRIGADE" baseTableName="RATTACHEMENTS" constraintName="ID_BRIGADE_FK_RATTACHEMENTS" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="BRIGADES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-111">
+        <addForeignKeyConstraint baseColumnNames="ID_CATEGORIE_FAIT" baseTableName="NATURES_FAIT" constraintName="ID_CATEGORIE_FAIT_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="CATEGORIES_FAIT"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-112">
+        <addForeignKeyConstraint baseColumnNames="ID_CATEGORIE_SAISINE" baseTableName="FICHES" constraintName="ID_CATEGORIE_SAISINE_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="CATEGORIES_SAISINE"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-113">
+        <addForeignKeyConstraint baseColumnNames="ID_CONTACT_INTERPOLICE" baseTableName="FICHES" constraintName="ID_CONTACT_INTERPOLICE_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="CONTACTS_INTERPOLICE"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-114">
+        <addForeignKeyConstraint baseColumnNames="ID_FICHE" baseTableName="HISTORIQUES" constraintName="ID_FICHE_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="FICHES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-115">
+        <addForeignKeyConstraint baseColumnNames="ID_FICHE" baseTableName="APPELANTS" constraintName="ID_FICHE_FK_APPELANTS" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="FICHES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-116">
+        <addForeignKeyConstraint baseColumnNames="ID_FICHE" baseTableName="FAITS" constraintName="ID_FICHE_FK_FAITS" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="FICHES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-117">
+        <addForeignKeyConstraint baseColumnNames="ID_FICHE" baseTableName="PATROUILLES" constraintName="ID_FICHE_FK_PATROUILLES" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="FICHES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-118">
+        <addForeignKeyConstraint baseColumnNames="ID_FICHE" baseTableName="PERSONNES" constraintName="ID_FICHE_FK_PERSONNES" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="FICHES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-119">
+        <addForeignKeyConstraint baseColumnNames="ID_FICHE" baseTableName="PROCEDURES" constraintName="ID_FICHE_FK_PROCEDURES" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="FICHES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-120">
+        <addForeignKeyConstraint baseColumnNames="ID_GEOLOCALISATION_VP" baseTableName="EQUIPAGES_GEOLOCALISATIONS_VP" constraintName="ID_GEOLOC_FK_EQUIPAGES_GEOLOC" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="GEOLOCALISATIONS_VP"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-121">
+        <addForeignKeyConstraint baseColumnNames="ID_GEOLOCALISATION_VP" baseTableName="ERREURS_GEOLOCALISATIONS_VP" constraintName="ID_GEOLOC_FK_ERREURS_GEOLOC" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="GEOLOCALISATIONS_VP"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-122">
+        <addForeignKeyConstraint baseColumnNames="ID_INDICATIF_RADIO" baseTableName="GEOLOCALISATIONS_VP" constraintName="ID_INDICATIF_FK_GEOLOC" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="INDICATIFS_RADIOS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-123">
+        <addForeignKeyConstraint baseColumnNames="ID_INDICATIF_RADIO" baseTableName="PATROUILLES" constraintName="ID_INDICATIF_RADIO_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="INDICATIFS_RADIOS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-124">
+        <addForeignKeyConstraint baseColumnNames="ID_LIEU_PREDEFINI" baseTableName="FICHES" constraintName="ID_LIEU_PREDEFINI_FK_FICHES" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="LIEUX_PREDEFINIS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-126">
+        <addForeignKeyConstraint baseColumnNames="ID_NATURE" baseTableName="ALERTES_RECIDIVES" constraintName="ID_NATURE_FK_ALERTES" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="NATURES_FAIT"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-127">
+        <addForeignKeyConstraint baseColumnNames="ID_NOM_VOIE" baseTableName="ADRESSES" constraintName="ID_NOM_VOIE_FK_ADRESSES" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="NOM_VOIES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-128">
+        <addForeignKeyConstraint baseColumnNames="ID_PATROUILLE" baseTableName="EQUIPAGES" constraintName="ID_PATROUILLE_FK_EQUIPAGES" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="PATROUILLES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-129">
+        <addForeignKeyConstraint baseColumnNames="ID_PROFIL" baseTableName="UTILISATEURS" constraintName="ID_PROFIL_FK_UTILISATEURS" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="PROFILS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-130">
+        <addForeignKeyConstraint baseColumnNames="ID_QUARTIER" baseTableName="ADRESSES" constraintName="ID_QUARTIER_FK_ADRESSES" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="QUARTIERS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-131">
+        <addForeignKeyConstraint baseColumnNames="ID_SECTEUR" baseTableName="QUARTIERS" constraintName="ID_SECTEUR_FK_QUARTIERS" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SECTEURS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-132">
+        <addForeignKeyConstraint baseColumnNames="ID_UTILISATEUR" baseTableName="HISTORIQUES" constraintName="ID_UTILISATEUR_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="UTILISATEURS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-133">
+        <addForeignKeyConstraint baseColumnNames="ID_UTILISATEUR" baseTableName="PRE_FICHES" constraintName="ID_UTILISATEUR_FK_PRE_FICHES" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="UTILISATEURS"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-134">
+        <addForeignKeyConstraint baseColumnNames="ID_VEHICULE" baseTableName="GEOLOCALISATIONS_VP" constraintName="ID_VEHICULE_FK_GEOLOC" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="VEHICULES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-135">
+        <addForeignKeyConstraint baseColumnNames="ID_VEHICULE" baseTableName="PATROUILLES" constraintName="ID_VEHICULE_FK_PATROUILLES" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="VEHICULES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-136">
+        <addForeignKeyConstraint baseColumnNames="ID_VILLE" baseTableName="SECTEURS" constraintName="ID_VILLE_FK_SECTEURS" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="VILLES"/>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-137">
+        <createIndex indexName="DONNEE_BRUTE_ADRESSE" tableName="ADRESSES" unique="true">
+            <column name="DONNEE_BRUTE"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="rayni84" id="1417670162732-138">
+        <createIndex indexName="REFERENCE_FICHE" tableName="FICHES" unique="true">
+            <column name="REFERENCE"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

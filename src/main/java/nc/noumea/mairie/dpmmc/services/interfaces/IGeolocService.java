@@ -7,6 +7,6 @@ import java.util.List;
 public interface IGeolocService {
 
     List<GeolocFicheModel> getAwaitingGeolocs();
-    List<GeolocFicheModel> updateAndGetAwaitingGeolocs();
+    void updateAwaitingGeolocs();
     void removeFicheFromList(Long idGeolocalisationVP);
 }

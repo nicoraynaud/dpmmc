@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="rayni84" id="12443bde-c2b9-11e4-8dfc-aa07a5b093db-1">
+        <dropNotNullConstraint
+            columnDataType="INT4"
+            columnName="NOMBRE"
+            tableName="PERSONNES"/>
+    </changeSet>
+
+    <changeSet author="rayni84" id="12443bde-c2b9-11e4-8dfc-aa07a5b093db-2">
+        <dropNotNullConstraint
+                columnDataType="VARCHAR(255)"
+                columnName="DETAILS"
+                tableName="PERSONNES"/>
+    </changeSet>
+
+    <changeSet author="rayni84" id="12443bde-c2b9-11e4-8dfc-aa07a5b093db-3">
+        <dropSequence sequenceName="dpmmc_s_adresses"/>
+        <dropSequence sequenceName="dpmmc_s_nom_voies"/>
+    </changeSet>
+
+</databaseChangeLog>
