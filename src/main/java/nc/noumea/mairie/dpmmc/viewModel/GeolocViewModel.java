@@ -30,6 +30,18 @@ public class GeolocViewModel {
         return refreshInterval;
     }
 
+    private Integer nbFiches;
+
+    public Integer getNbFiches() {
+        return nbFiches;
+    }
+
+    private Long nbTotalFiches;
+
+    public Long getNbTotalFiches() {
+        return nbTotalFiches;
+    }
+
     private Date lastRefreshDate;
 
     public Date getLastRefreshDate() {
@@ -45,7 +57,10 @@ public class GeolocViewModel {
     @Init
     public void initLists() {
         refreshInterval = appParametersService.getTicketsRefreshInterval();
-        awaitingGeolocs = geolocService.getAwaitingGeolocs();
+        GeolocFicheListModel result = geolocService.getAwaitingGeolocs();
+        awaitingGeolocs = result.getFiches();
+        nbTotalFiches = result.getTotalResults();
+        nbFiches = awaitingGeolocs.size();
         lastRefreshDate = new Date();
     }
 
@@ -57,11 +72,13 @@ public class GeolocViewModel {
     }
 
     @Command
-    @NotifyChange({ "lastRefreshDate", "awaitingGeolocs" })
+    @NotifyChange({ "lastRefreshDate", "awaitingGeolocs", "nbTotalFiches", "nbFiches" })
     public void refreshList() {
-
         awaitingGeolocs.clear();
-        awaitingGeolocs = geolocService.getAwaitingGeolocs();
+        GeolocFicheListModel result = geolocService.getAwaitingGeolocs();
+        awaitingGeolocs = result.getFiches();
+        nbTotalFiches = result.getTotalResults();
+        nbFiches = awaitingGeolocs.size();
         lastRefreshDate = new Date();
     }
 }

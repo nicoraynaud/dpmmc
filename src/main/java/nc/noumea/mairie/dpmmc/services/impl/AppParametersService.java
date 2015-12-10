@@ -26,9 +26,14 @@ public class AppParametersService implements IAppParametersService {
         return appParametersDao.getParameter("nb_max_fiches_page");
     }
 
-
     @Override
     public int getTicketsRefreshInterval() {
         return appParametersDao.getParameter("ms_tickets_interval");
     }
+
+    @Override
+    public int getMaxTicketsNb() {
+        return appParametersDao.getParameter("mb_max_tickets");
+    }
+
 }

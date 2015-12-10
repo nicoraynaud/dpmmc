@@ -11,4 +11,14 @@
         </insert>
     </changeSet>
 
+
+    <changeSet author="rayni84" id="00c5d7e6-9efa-11e5-8997-feff819cdc9f-2">
+        <insert tableName='PARAMETRES_APPLICATION'>
+            <column name='CODE' value='mb_max_tickets' />
+            <column name='LIBELLE' value='Nombre maximal de tickets à afficher dans le menu de gauche' />
+            <column name='VALEUR' value='10' />
+            <column name='VERSION' value='0' />
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>

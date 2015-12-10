@@ -12,6 +12,13 @@
                 <label value="@bind(vmGeoloc.lastRefreshDate)  @converter('formatedDate',format='dd/MM/yyyy HH:mm:ss')"
                        style="float:right;"/>
             </div>
+            <div width="100%" style="float:left; font-style: italic">
+                <label value="@bind(vmGeoloc.nbFiches)"/>
+                <label value="Fiches"/>
+                <label value="( Total : " visible="@bind(vmGeoloc.nbTotalFiches gt vmGeoloc.nbFiches)"/>
+                <label value="@bind(vmGeoloc.nbTotalFiches)" visible="@bind(vmGeoloc.nbTotalFiches gt vmGeoloc.nbFiches)"/>
+                <label value=")" visible="@bind(vmGeoloc.nbTotalFiches gt vmGeoloc.nbFiches)"/>
+            </div>
         </caption>
         <panelchildren>
             <listbox id="list" model="@bind(vmGeoloc.awaitingGeolocs)" hflex="1">
