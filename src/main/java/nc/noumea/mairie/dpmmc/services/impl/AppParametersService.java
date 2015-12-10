@@ -25,4 +25,10 @@ public class AppParametersService implements IAppParametersService {
     public int getActivitesTablePageSize() {
         return appParametersDao.getParameter("nb_max_fiches_page");
     }
+
+
+    @Override
+    public int getTicketsRefreshInterval() {
+        return appParametersDao.getParameter("ms_tickets_interval");
+    }
 }

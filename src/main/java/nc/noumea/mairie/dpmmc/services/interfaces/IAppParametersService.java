@@ -7,4 +7,6 @@ public interface IAppParametersService {
     int getTablePageSize();
 
     int getActivitesTablePageSize();
+
+    int getTicketsRefreshInterval();
 }

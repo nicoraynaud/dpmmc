@@ -1,5 +1,6 @@
 package nc.noumea.mairie.dpmmc.viewModel;
 
+import nc.noumea.mairie.dpmmc.services.interfaces.IAppParametersService;
 import nc.noumea.mairie.dpmmc.services.interfaces.IGeolocService;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -20,6 +21,15 @@ public class GeolocViewModel {
     @WireVariable
     private IGeolocService geolocService;
 
+    @WireVariable
+    private IAppParametersService appParametersService;
+
+    private Integer refreshInterval;
+
+    public Integer getRefreshInterval() {
+        return refreshInterval;
+    }
+
     private Date lastRefreshDate;
 
     public Date getLastRefreshDate() {
@@ -34,6 +44,7 @@ public class GeolocViewModel {
 
     @Init
     public void initLists() {
+        refreshInterval = appParametersService.getTicketsRefreshInterval();
         awaitingGeolocs = geolocService.getAwaitingGeolocs();
         lastRefreshDate = new Date();
     }

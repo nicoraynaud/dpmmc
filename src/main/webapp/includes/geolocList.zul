@@ -62,7 +62,7 @@
                     </listitem>
                 </template>
             </listbox>
-            <timer id="timer" delay="5000" repeats="true" onTimer="@command('refreshList')">
+            <timer id="timer" delay="@load(vmGeoloc.refreshInterval)" repeats="true" onTimer="@command('refreshList')">
             </timer>
         </panelchildren>
     </panel>

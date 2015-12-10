@@ -47,7 +47,10 @@
     <!-- 9.0 create quartz table schema -->
     <include file="db.changelog-dpmmc-9.0-create-quartz-tables.xml"/>
 
-    <!-- 9.1 create quartz job for Geoloc -->
+    <!-- 9.0 create quartz job for Geoloc -->
     <include file="db.changelog-dpmmc-9.0-insert-quartz-job.xml"/>
+
+    <!-- 9.0 new parameters -->
+    <include file="db.changelog-dpmmc-9.0-insert-parameters.xml" />
 
 </databaseChangeLog>
