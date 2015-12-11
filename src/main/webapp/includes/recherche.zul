@@ -98,9 +98,9 @@
                             </template>
                         </combobox>
                         <label value="Date de saisie :" style="margin-left: 10px"/>
-                        <hbox>
+                        <hbox hflex="1">
                             entre
-                            <datebox value="@bind(vmRecherche.dateSaisieStart)" format="dd/MM/yyyy HH:mm" hflex="1" onOK="@command('search')"/>
+                            <datebox value="@bind(vmRecherche.dateSaisieStart)" format="dd/MM/yyyy HH:mm" hflex="1" onOK="@command('search')" />
                             et
                             <datebox value="@bind(vmRecherche.dateSaisieEnd)" format="dd/MM/yyyy HH:mm" hflex="1" onOK="@command('search')"/>
                         </hbox>
