@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 public class DpmmcAuthoritiesPopulator implements LdapAuthoritiesPopulator {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "dpmmcPersistenceUnit")
     private EntityManager _entityManager;
 
     @Override

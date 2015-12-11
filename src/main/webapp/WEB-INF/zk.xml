@@ -9,6 +9,14 @@
 		<value>dpmmc</value>
 	</preference>
 	-->
+	<client-config>
+		<debug-js>true</debug-js>
+	</client-config>
+	<library-property>
+		<name>org.zkoss.web.classWebResource.cache</name>
+		<value>false</value>
+	</library-property>
+
     <desktop-config>
         <theme-uri>/style/style.css</theme-uri>
     </desktop-config>

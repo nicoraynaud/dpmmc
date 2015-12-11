@@ -5,7 +5,9 @@ import nc.noumea.mairie.dpmmc.domain.GeolocalisationVP;
 import nc.noumea.mairie.dpmmc.domain.MajGeoloc;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -18,6 +20,9 @@ import java.util.Map;
 
 @Repository
 public class GeolocDao extends GenericDao {
+
+    @PersistenceContext(unitName = "dpmmcGeolocPersistenceUnit")
+    protected EntityManager geolocEm;
 
     public Map.Entry<Long, List<GeolocalisationVP>> getAwaitingGeolocs(int max) {
 
@@ -56,7 +61,7 @@ public class GeolocDao extends GenericDao {
     }
 
     public List<DonneeBrutGeoloc> getDonneesBrutSinceDate(Date date) {
-        TypedQuery<DonneeBrutGeoloc> q = em.createNamedQuery("getDonneesBrutesSinceDate", DonneeBrutGeoloc.class);
+        TypedQuery<DonneeBrutGeoloc> q = geolocEm.createNamedQuery("getDonneesBrutesSinceDate", DonneeBrutGeoloc.class);
         q.setParameter("date", date);
         return q.getResultList();
     }

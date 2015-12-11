@@ -5,6 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "VM_GEOLOC")
+@PersistenceUnit(unitName = "dpmmcGeolocPersistenceUnit")
 @NamedQuery(name = "getDonneesBrutesSinceDate", query = "from DonneeBrutGeoloc where action = 'N' and dateHeure > :date order by dateHeure desc")
 public class DonneeBrutGeoloc {
 

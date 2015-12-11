@@ -45,24 +45,24 @@
     </authentication-manager>
 
     <!-- Mock authentication provider -->
-    <!--<beans:bean id="mockAuthProvider" class="nc.noumea.mairie.dpmmc.security.MockAuthenticationProvider">-->
-        <!--<beans:constructor-arg name="authoritiesPopulator">-->
-            <!--<beans:bean class="nc.noumea.mairie.dpmmc.security.DpmmcAuthoritiesPopulator"/>-->
-        <!--</beans:constructor-arg>-->
-    <!--</beans:bean>-->
-
-    <!-- LDAP authentication provider -->
-    <beans:bean id="customLdapAuthProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
-        <beans:constructor-arg name="authenticator">
-            <beans:bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
-                <beans:constructor-arg name="contextSource" ref="ldapServer"/>
-                <beans:property name="userSearch" ref="userSearch" />
-            </beans:bean>
-        </beans:constructor-arg>
+    <beans:bean id="customLdapAuthProvider" class="nc.noumea.mairie.dpmmc.security.MockAuthenticationProvider">
         <beans:constructor-arg name="authoritiesPopulator">
             <beans:bean class="nc.noumea.mairie.dpmmc.security.DpmmcAuthoritiesPopulator"/>
         </beans:constructor-arg>
     </beans:bean>
+
+    <!-- LDAP authentication provider -->
+    <!--<beans:bean id="customLdapAuthProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">-->
+        <!--<beans:constructor-arg name="authenticator">-->
+            <!--<beans:bean class="org.springframework.security.ldap.authentication.BindAuthenticator">-->
+                <!--<beans:constructor-arg name="contextSource" ref="ldapServer"/>-->
+                <!--<beans:property name="userSearch" ref="userSearch" />-->
+            <!--</beans:bean>-->
+        <!--</beans:constructor-arg>-->
+        <!--<beans:constructor-arg name="authoritiesPopulator">-->
+            <!--<beans:bean class="nc.noumea.mairie.dpmmc.security.DpmmcAuthoritiesPopulator"/>-->
+        <!--</beans:constructor-arg>-->
+    <!--</beans:bean>-->
 
     <beans:bean id="userSearch"
           class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">

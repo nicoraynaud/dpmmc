@@ -11,7 +11,7 @@ import javax.persistence.Query;
 @Repository
 public class AppParametersDao {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "dpmmcPersistenceUnit")
     protected EntityManager em;
 
     @Transactional
