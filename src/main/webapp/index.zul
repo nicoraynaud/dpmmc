@@ -31,7 +31,7 @@
                                                visible="${sec:isAllGranted('ROLE_CREATION_FICHE')}"/>
                                 <toolbarbutton id="utilisateursMenuButton" label="Administrer Utilisateurs"
                                                onClick="@command('openTab', id='utilisateursTabPanel', label='Utilisateurs', zulTemplate='/includes/utilisateurs.zul', closable=true, sclass='utilisateur-profil-tab')"
-                                               visible="${sec:isAllGranted('ROLE_ADMINISTRATION')}"/>
+                                               visible="${sec:isAllGranted('ROLE_CREATION_FICHE')}"/>
                                 <toolbarbutton id="profilsMenuButton" label="Administrer Profils"
                                                onClick="@command('openTab', id='profilsTabPanel', label='Profils', zulTemplate='/includes/profils.zul', closable=true, sclass='utilisateur-profil-tab')"
                                                visible="${sec:isAllGranted('ROLE_ADMINISTRATION')}"/>

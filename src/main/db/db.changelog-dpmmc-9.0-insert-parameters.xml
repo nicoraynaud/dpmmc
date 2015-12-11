@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet author="rayni84" id="00c5d7e6-9efa-11e5-8997-feff819cdc9f-1">
+        <insert tableName='PARAMETRES_APPLICATION'>
+            <column name='CODE' value='ms_tickets_interval' />
+            <column name='LIBELLE' value='Fréquence de rafraichissement des tickets de géolocalisation (en millisecondes)' />
+            <column name='VALEUR' value='3000' />
+            <column name='VERSION' value='0' />
+        </insert>
+    </changeSet>
+
+
+    <changeSet author="rayni84" id="00c5d7e6-9efa-11e5-8997-feff819cdc9f-2">
+        <insert tableName='PARAMETRES_APPLICATION'>
+            <column name='CODE' value='mb_max_tickets' />
+            <column name='LIBELLE' value='Nombre maximal de tickets à afficher dans le menu de gauche' />
+            <column name='VALEUR' value='10' />
+            <column name='VERSION' value='0' />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

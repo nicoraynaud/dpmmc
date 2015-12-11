@@ -1,5 +1,6 @@
 package nc.noumea.mairie.dpmmc.viewModel;
 
+import nc.noumea.mairie.dpmmc.services.interfaces.IAppParametersService;
 import nc.noumea.mairie.dpmmc.services.interfaces.IGeolocService;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -20,6 +21,27 @@ public class GeolocViewModel {
     @WireVariable
     private IGeolocService geolocService;
 
+    @WireVariable
+    private IAppParametersService appParametersService;
+
+    private Integer refreshInterval;
+
+    public Integer getRefreshInterval() {
+        return refreshInterval;
+    }
+
+    private Integer nbFiches;
+
+    public Integer getNbFiches() {
+        return nbFiches;
+    }
+
+    private Long nbTotalFiches;
+
+    public Long getNbTotalFiches() {
+        return nbTotalFiches;
+    }
+
     private Date lastRefreshDate;
 
     public Date getLastRefreshDate() {
@@ -34,7 +56,11 @@ public class GeolocViewModel {
 
     @Init
     public void initLists() {
-        awaitingGeolocs = geolocService.getAwaitingGeolocs();
+        refreshInterval = appParametersService.getTicketsRefreshInterval();
+        GeolocFicheListModel result = geolocService.getAwaitingGeolocs();
+        awaitingGeolocs = result.getFiches();
+        nbTotalFiches = result.getTotalResults();
+        nbFiches = awaitingGeolocs.size();
         lastRefreshDate = new Date();
     }
 
@@ -46,11 +72,13 @@ public class GeolocViewModel {
     }
 
     @Command
-    @NotifyChange({ "lastRefreshDate", "awaitingGeolocs" })
+    @NotifyChange({ "lastRefreshDate", "awaitingGeolocs", "nbTotalFiches", "nbFiches" })
     public void refreshList() {
-
         awaitingGeolocs.clear();
-        awaitingGeolocs = geolocService.updateAndGetAwaitingGeolocs();
+        GeolocFicheListModel result = geolocService.getAwaitingGeolocs();
+        awaitingGeolocs = result.getFiches();
+        nbTotalFiches = result.getTotalResults();
+        nbFiches = awaitingGeolocs.size();
         lastRefreshDate = new Date();
     }
 }

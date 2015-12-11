@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet author="rayni84" id="00c5d7e6-9efa-11e5-8994-feff819cdc9f-1">
+        <insert tableName='QRTZ_JOB_DETAILS'>
+            <column name='SCHED_NAME' value='org.springframework.scheduling.quartz.SchedulerFactoryBean#0' />
+            <column name='JOB_NAME' value='geolocJob' />
+            <column name='JOB_GROUP' value='dpmmc' />
+            <column name='JOB_CLASS_NAME' value='nc.noumea.mairie.dpmmc.job.GeolocJob' />
+            <column name='IS_DURABLE' value='0' />
+            <column name='IS_NONCONCURRENT' value='1' />
+            <column name='IS_UPDATE_DATA' value='0' />
+            <column name='REQUESTS_RECOVERY' value='0' />
+        </insert>
+
+        <insert tableName='QRTZ_TRIGGERS'>
+            <column name='SCHED_NAME' value='org.springframework.scheduling.quartz.SchedulerFactoryBean#0' />
+            <column name='TRIGGER_NAME' value='cronDpmmcGeolocJobTrigger' />
+            <column name='TRIGGER_GROUP' value='dpmmc' />
+            <column name='JOB_NAME' value='geolocJob' />
+            <column name='JOB_GROUP' value='dpmmc' />
+            <column name='NEXT_FIRE_TIME' value='1355354610000' />
+            <column name='PREV_FIRE_TIME' value='1355354600000' />
+            <column name='PRIORITY' value='5' />
+            <column name='TRIGGER_STATE' value='WAITING' />
+            <column name='TRIGGER_TYPE' value='CRON' />
+            <column name='START_TIME' value='1355353943000' />
+            <column name='END_TIME' value='0' />
+            <column name='MISFIRE_INSTR' value='0' />
+        </insert>
+
+        <insert tableName='QRTZ_CRON_TRIGGERS'>
+            <column name='SCHED_NAME' value='org.springframework.scheduling.quartz.SchedulerFactoryBean#0' />
+            <column name='TRIGGER_NAME' value='cronDpmmcGeolocJobTrigger' />
+            <column name='TRIGGER_GROUP' value='dpmmc' />
+            <column name='CRON_EXPRESSION' value='0/5 * * * * ?' />
+            <column name='TIME_ZONE_ID' value='Pacific/Noumea' />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

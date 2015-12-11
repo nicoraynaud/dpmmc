@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="rayni84" id="5e6dd516-e582-4b71-a94b-024d0c6ed875-1">
+        <addUniqueConstraint
+            columnNames="identifiant"
+            constraintName="dpmmc_util_unique_identifiant"
+            tableName="utilisateurs"/>
+    </changeSet>
+
+    <changeSet author="rayni84" id="5e6dd516-e582-4b71-a94b-024d0c6ed875-2">
+        <addUniqueConstraint
+            columnNames="id_agent"
+            constraintName="dpmmc_util_unique_agent"
+            tableName="utilisateurs"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -2,7 +2,9 @@ package nc.noumea.mairie.dpmmc.services.impl;
 
 import nc.noumea.mairie.dpmmc.dao.GeolocDao;
 import nc.noumea.mairie.dpmmc.domain.*;
+import nc.noumea.mairie.dpmmc.services.interfaces.IAppParametersService;
 import nc.noumea.mairie.dpmmc.services.interfaces.IGeolocService;
+import nc.noumea.mairie.dpmmc.viewModel.GeolocFicheListModel;
 import nc.noumea.mairie.dpmmc.viewModel.GeolocFicheModel;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GeolocService implements IGeolocService {
@@ -22,26 +25,31 @@ public class GeolocService implements IGeolocService {
     @Autowired
     private GeolocDao geolocDao;
 
+    @Autowired
+    private IAppParametersService appParametersService;
+
     private Logger logger = LoggerFactory.getLogger(GeolocService.class);
 
     @Override
     @Transactional
-    public List<GeolocFicheModel> getAwaitingGeolocs() {
+    public GeolocFicheListModel getAwaitingGeolocs() {
 
-        List<GeolocalisationVP> results = geolocDao.getAwaitingGeolocs();
+        Map.Entry<Long, List<GeolocalisationVP>> results = geolocDao.getAwaitingGeolocs(appParametersService.getMaxTicketsNb());
         List<GeolocFicheModel> gfms = new ArrayList<>();
 
-        for (GeolocalisationVP gvp : results) {
+        for (GeolocalisationVP gvp : results.getValue()) {
             GeolocFicheModel gfm = new GeolocFicheModel(gvp);
             gfms.add(gfm);
         }
 
-        return gfms;
+        GeolocFicheListModel result = new GeolocFicheListModel(results.getKey(), gfms);
+
+        return result;
     }
 
     @Override
     @Transactional
-    public List<GeolocFicheModel> updateAndGetAwaitingGeolocs() {
+    public void updateAwaitingGeolocs() {
 
         logger.info("Mise à jour de la liste des tickets de géoloc...");
 
@@ -70,8 +78,6 @@ public class GeolocService implements IGeolocService {
         if (newDateSaved) {
             maj.setDateDerniereMaj(lastSyncedData);
         }
-        // return latest Geolocs
-        return getAwaitingGeolocs();
     }
 
     @Override

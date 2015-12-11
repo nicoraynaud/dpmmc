@@ -28,4 +28,15 @@
 	</bean>
 	
  	<tx:annotation-driven />
+
+	<!-- Quartz job config -->
+    <!-- Quartz Jobs Scheduler w/ Spring DI -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobFactory">
+            <bean class="nc.noumea.mairie.dpmmc.job.SpringJobFactory" />
+        </property>
+        <property name="configLocation" value="classpath:quartz.properties" />
+        <property name="applicationContextSchedulerContextKey" value="applicationContext" />
+    </bean>
+
 </beans>
