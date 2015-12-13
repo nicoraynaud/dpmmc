@@ -9,6 +9,7 @@
 		<value>dpmmc</value>
 	</preference>
 	-->
+	
     <desktop-config>
         <theme-uri>/style/style.css</theme-uri>
     </desktop-config>

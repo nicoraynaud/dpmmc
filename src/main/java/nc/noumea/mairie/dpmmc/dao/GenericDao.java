@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public class GenericDao {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "dpmmcPersistenceUnit")
     protected EntityManager em;
 
     @Transactional

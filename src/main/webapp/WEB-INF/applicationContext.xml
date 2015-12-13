@@ -26,7 +26,20 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	
+
+    <!-- jpa(hibernate) configuration for second datasource (geoloc)-->
+    <jee:jndi-lookup id="dpmmcGeolocPostgresDatasource" jndi-name="jdbc/DPMMC_DS2"
+                     resource-ref="true" />
+
+    <bean id="geolocEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="dpmmcGeolocPersistenceUnit"/>
+        <property name="dataSource" ref="dpmmcGeolocPostgresDatasource" />
+    </bean>
+
+    <bean id="geolocTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="geolocEntityManagerFactory" />
+    </bean>
+
  	<tx:annotation-driven />
 
 	<!-- Quartz job config -->
