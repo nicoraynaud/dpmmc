@@ -9,7 +9,7 @@
             mode="modal" position="center,center" width="500px" height="140px" closable="true"
             title="Confirmer la suppression" border="normal"
             action="show: slideDown;hide: slideUp"
-            onCancel="win.detach()">
+            onCancel="self.detach()">
 
         <vbox vflex="1" hflex="1">
 

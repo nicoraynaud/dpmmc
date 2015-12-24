@@ -9,7 +9,7 @@
             mode="modal" position="center,center" width="600px" height="430px" closable="true"
             title="Choisir les équipages" border="normal"
             action="show: slideDown;hide: slideUp"
-            onCancel="win.detach()">
+            onCancel="self.detach()">
         <grid>
             <columns>
                 <column/>
@@ -23,7 +23,7 @@
                             <combobox placeholder="Brigade"
                                       model="@load(vmEquipage.brigades)"
                                       selectedItem="@bind(vmEquipage.selectedBrigade)" hflex="1"
-                                      onChange="@command('refreshLists', whoChanged='brigades')">
+                                      onChange="@command('refreshLists', whoChanged='brigades')" onCreate="self.focus()">
                                 <template name="model">
                                     <comboitem label="@load(each.libelleCourt)"/>
                                 </template>
