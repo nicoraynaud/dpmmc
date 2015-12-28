@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IProfilService {
 
-    @Secured({"ROLE_ADMINISTRATION"})
+    @Secured({"ROLE_ADMINISTRATION", "ROLE_CREATION_FICHE"})
     List<Profil> getAllProfils();
 
     @Secured({"ROLE_ADMINISTRATION"})
