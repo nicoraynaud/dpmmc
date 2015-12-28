@@ -7,6 +7,7 @@ import nc.noumea.mairie.dpmmc.dao.UtilisateurDao;
 import nc.noumea.mairie.dpmmc.domain.*;
 import nc.noumea.mairie.dpmmc.services.BusinessException;
 import nc.noumea.mairie.dpmmc.services.interfaces.IAuthHelper;
+import nc.noumea.mairie.dpmmc.services.interfaces.IFicheEventReportHelper;
 import nc.noumea.mairie.dpmmc.services.interfaces.IFicheReportHelper;
 import nc.noumea.mairie.dpmmc.services.interfaces.IFicheService;
 import nc.noumea.mairie.dpmmc.viewModel.FicheModel;
@@ -18,10 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class FicheService implements IFicheService {
@@ -40,6 +39,9 @@ public class FicheService implements IFicheService {
 
     @Autowired
     private IFicheReportHelper ficheReportHelper;
+
+    @Autowired
+    private IFicheEventReportHelper ficheEventReportHelper;
 
     @Override
     public List<FicheSearchResultModel> getLastFichesCloturees() {
@@ -102,6 +104,66 @@ public class FicheService implements IFicheService {
 
         return results;
     }
+
+    @Override
+    @Transactional
+    public byte[] exportFicheEventReport(String numeroFiche, Long agentId, Long brigadeId, Long natureId, Long categorieId, Long secteurId, Long quartierId, Long lieuPredefiniId, Long categoriePersonneId, String nomPersonne, Date dateSaisieStart, Date dateSaisieEnd) {
+
+        List<Fiche> fiches = new ArrayList<Fiche>();
+
+        List<Historique> queryResults = ficheDao.searchFiches(numeroFiche, agentId, brigadeId, natureId, categorieId, secteurId, quartierId, lieuPredefiniId, categoriePersonneId, nomPersonne, dateSaisieStart, dateSaisieEnd);
+
+        for (Historique histo : queryResults) {
+            fiches.add(histo.getFiche());
+        }
+
+        Map<String, String> searchParams = new HashMap<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
+        if (dateSaisieStart != null) {
+            searchParams.put("Date de début", sdf.format(dateSaisieStart));
+        }
+        if (dateSaisieEnd != null) {
+            searchParams.put("Date de fin", sdf.format(dateSaisieEnd));
+        }
+        if (!StringUtils.isEmpty(numeroFiche)) {
+            searchParams.put("Numéro", numeroFiche);
+        }
+        if (agentId != null && agentId != 0) {
+            Agent a = utilisateurDao.get(Agent.class, agentId);
+            searchParams.put("Agent", a.getNom() + " " + a.getPrenom());
+        }
+        if (natureId != null && natureId != 0) {
+            NatureFait n = ficheDao.get(NatureFait.class, natureId);
+            searchParams.put("Nature", n.getLibelleLong());
+        }
+        if (quartierId != null && quartierId != 0) {
+            Quartier q = ficheDao.get(Quartier.class, quartierId);
+            searchParams.put("Quartier", q.getLibelle());
+        }
+        if (brigadeId != null && brigadeId != 0) {
+            Brigade b = ficheDao.get(Brigade.class, brigadeId);
+            searchParams.put("Brigade", b.getLibelleLong());
+        }
+        if (categorieId != null && categorieId != 0) {
+            CategorieFait c = ficheDao.get(CategorieFait.class, categorieId);
+            searchParams.put("Catégorie", c.getLibelleLong());
+        }
+        if (secteurId != null && secteurId != 0) {
+            Secteur s = ficheDao.get(Secteur.class, secteurId);
+            searchParams.put("Secteur", s.getLibelle());
+        }
+        if (categoriePersonneId != null && categoriePersonneId != 0) {
+            CategoriePersonne cp = ficheDao.get(CategoriePersonne.class, categoriePersonneId);
+            searchParams.put("Catégorie Personne", cp.getLibelleLong());
+        }
+        if (lieuPredefiniId != null && lieuPredefiniId != 0) {
+            LieuPredefini lp = ficheDao.get(LieuPredefini.class, lieuPredefiniId);
+            searchParams.put("Lieu", lp.getLibelleLong());
+        }
+
+        return ficheEventReportHelper.buildReportFromFiches(fiches, searchParams);
+    }
+
 
     @Override
     @Transactional

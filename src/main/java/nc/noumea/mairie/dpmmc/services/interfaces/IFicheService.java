@@ -19,6 +19,9 @@ public interface IFicheService {
     @Secured({"ROLE_RECH_FICHE"})
     List<FicheSearchResultModel> search(String numeroFiche, Long agentId, Long brigadeId, Long natureId, Long categorieId, Long secteurId, Long quartierId, Long lieuPredefiniId, Long categoriePersonneId, String nomPersonne, Date dateSaisieStart, Date dateSaisieEnd);
 
+    @Secured({"ROLE_RECH_FICHE"})
+    byte[] exportFicheEventReport(String numeroFiche, Long agentId, Long brigadeId, Long natureId, Long categorieId, Long secteurId, Long quartierId, Long lieuPredefiniId, Long categoriePersonneId, String nomPersonne, Date dateSaisieStart, Date dateSaisieEnd);
+
     void saveFiche(Fiche fiche);
 
     FicheModel getFiche(Long idFiche);

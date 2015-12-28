@@ -223,6 +223,15 @@
                             </combobox>
                         </row>
                         <row>
+                            <label value="Titre : " style="margin-left: 10px;" tooltip="situationInitialeTitreP"
+                                   sclass="@bind(vmFiche.formErrors.containsKey('situationInitialeTitre') ? 'labelError':'')"/>
+                            <cell colspan="3">
+                                <textbox hflex="1" constraint="no empty: Champ requis" maxlength="100"
+                                         value="@bind(vmFiche.fiche.fiche.situationInitialeTitre)"
+                                         disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                            </cell>
+                        </row>
+                        <row>
                             <label value="Situation initiale : " style="margin-left: 10px;"/>
                             <cell colspan="3">
                                 <textbox hflex="1" multiline="true" rows="4"
@@ -389,6 +398,10 @@
             <popup id="gdhAppelP"
                    sclass="@bind(vmFiche.formErrors.containsKey('gdhAppel') ? 'popupVisible' : 'popupHidden')">
                 <label value="@bind(vmFiche.formErrors['gdhAppel'])" sclass="labelError"/>
+            </popup>
+            <popup id="situationInitialeTitreP"
+                   sclass="@bind(vmFiche.formErrors.containsKey('situationInitialeTitre') ? 'popupVisible' : 'popupHidden')">
+                <label value="@bind(vmFiche.formErrors['situationInitialeTitre'])" sclass="labelError"/>
             </popup>
             <popup id="categorieSaisineP"
                    sclass="@bind(vmFiche.formErrors.containsKey('categorieSaisine') ? 'popupVisible' : 'popupHidden')">

@@ -140,7 +140,8 @@
                     <row sclass="cellLayoutNoBorder">
                         <cell colspan="4" align="right">
                             <button label="Effacer" iconSclass="z-icon-eraser" onClick="@command('clearForm')" style="margin-right: 10px"/>
-                            <button label="Rechercher" iconSclass="z-icon-search" onClick="@command('search')"/>
+                            <button label="Rechercher" iconSclass="z-icon-search" onClick="@command('search')" style="margin-right: 10px"/>
+                            <button label="Imprimer Fiche Evénementielle" iconSclass="z-icon-print" onClick="@command('exportReport')"/>
                         </cell>
                     </row>
                 </rows>

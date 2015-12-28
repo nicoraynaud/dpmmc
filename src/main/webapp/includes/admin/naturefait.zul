@@ -10,13 +10,13 @@
         <grid vflex="1" hflex="1" mold="paging" pageSize="10" width="100%"
               model="@bind(vm.data)">
             <columns>
-                <column label="Libellé court" align="center" sort="auto(libelleCourt)"/>
-                <column label="Libellé long" align="center" sort="auto(libelleLong)"/>
-                <column label="Catégorie" align="center"/>
-                <column label="Archivée" align="center" sort="auto(archivee)"/>
-                <column label="Par défaut" align="center" sort="auto(parDefaut)"/>
-                <column label="Ordre" align="center" sort="auto(ordre)"/>
-                <column label="Statistiques" align="center" sort="auto(statistiques)"/>
+                <column label="Libellé court" align="center" sort="auto(libelleCourt)" width="auto"/>
+                <column label="Libellé long" align="center" sort="auto(libelleLong)" width="auto"/>
+                <column label="Catégorie" align="center" />
+                <column label="Archivée" align="center" sort="auto(archivee)" />
+                <column label="Par défaut" align="center" sort="auto(parDefaut)" />
+                <column label="Ordre" align="center" sort="auto(ordre)" />
+                <column label="Statistiques" align="center" sort="auto(statistiques)" />
             </columns>
             <template name="model">
                 <row>

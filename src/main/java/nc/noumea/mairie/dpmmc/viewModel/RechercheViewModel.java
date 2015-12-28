@@ -1,14 +1,19 @@
 package nc.noumea.mairie.dpmmc.viewModel;
 
+import com.itextpdf.text.DocumentException;
 import nc.noumea.mairie.dpmmc.domain.*;
 import nc.noumea.mairie.dpmmc.services.interfaces.IAppParametersService;
+import nc.noumea.mairie.dpmmc.services.interfaces.IFicheEventReportHelper;
 import nc.noumea.mairie.dpmmc.services.interfaces.IFicheService;
 import nc.noumea.mairie.dpmmc.services.interfaces.IReferenceService;
+import org.joda.time.DateTime;
+import org.springframework.util.StringUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.ListModel;
 
 import java.util.Date;
@@ -242,5 +247,24 @@ public class RechercheViewModel {
         nomPersonne = null;
         dateSaisieStart = null;
         dateSaisieEnd = null;
+    }
+
+
+    @Command
+    public void exportReport() {
+
+        byte[] reportAsBytes = ficheService.exportFicheEventReport(
+                ficheNumero,
+                selectedAgent != null ? selectedAgent.getId() : null,
+                selectedBrigade != null ? selectedBrigade.getId() : null,
+                selectedNature != null ? selectedNature.getId() : null,
+                selectedCategorieFait != null ? selectedCategorieFait.getId() : null,
+                selectedSecteur != null ? selectedSecteur.getId() : null,
+                selectedQuartier != null ? selectedQuartier.getId() : null,
+                selectedLieu != null ? selectedLieu.getId() : null,
+                selectedCategoriePersonne != null ? selectedCategoriePersonne.getId() : null,
+                nomPersonne, dateSaisieStart, dateSaisieEnd);
+        Filedownload.save(reportAsBytes, "application/pdf", String.format("fiche_evenementielle_%s", new DateTime().toString("dd-MM-yyyy")));
+
     }
 }
