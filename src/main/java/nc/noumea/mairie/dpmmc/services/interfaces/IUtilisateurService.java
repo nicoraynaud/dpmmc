@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface IUtilisateurService {
 
-    @Secured({"ROLE_ADMINISTRATION"})
+    @Secured({"ROLE_ADMINISTRATION", "ROLE_CREATION_FICHE"})
     public List<Utilisateur> getAllUtilisateurs();
 
-    @Secured({"ROLE_ADMINISTRATION"})
+    @Secured({"ROLE_ADMINISTRATION", "ROLE_CREATION_FICHE"})
     public Utilisateur save(Utilisateur utilisateur);
 }
