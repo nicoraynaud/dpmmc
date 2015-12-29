@@ -58,6 +58,7 @@ public class FicheEventReportHelper implements IFicheEventReportHelper {
             Document document = new Document(PageSize.A4.rotate());
             PdfWriter writer = PdfWriter.getInstance(document, bstream);
             FicheEventReportPageTemplate event = new FicheEventReportPageTemplate();
+            event.setFooter(date);
             writer.setPageEvent(event);
             document = buildMetadata(document, date);
 
@@ -180,6 +181,7 @@ public class FicheEventReportHelper implements IFicheEventReportHelper {
         table.setWidthPercentage(100);
         int[] widths = {14, 19, 17, 15, 20, 30, 30, 13, 33};
         table.setWidths(widths);
+        table.setHeaderRows(1);
 
         PdfPCell cell = new PdfPCell(new Phrase("N° Fiche", FONT_NORMAL));
         cell.setFixedHeight(40);

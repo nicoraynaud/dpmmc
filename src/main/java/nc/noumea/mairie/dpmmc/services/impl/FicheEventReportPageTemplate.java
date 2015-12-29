@@ -5,6 +5,8 @@ import com.itextpdf.text.pdf.*;
 
 public class FicheEventReportPageTemplate extends PdfPageEventHelper {
 
+    private Font FOOTER_FONT = new Font(Font.FontFamily.HELVETICA, 9, Font.ITALIC);
+
     /**
      * The footer text.
      */
@@ -19,7 +21,7 @@ public class FicheEventReportPageTemplate extends PdfPageEventHelper {
      *
      * @param footer The new footer String
      */
-    public void setHeader(String footer) {
+    public void setFooter(String footer) {
         this.footer = footer;
     }
 
@@ -43,17 +45,18 @@ public class FicheEventReportPageTemplate extends PdfPageEventHelper {
         PdfPTable table = new PdfPTable(3);
         try {
             table.setWidths(new int[]{24, 24, 2});
-            table.setTotalWidth(527);
+            table.setTotalWidth(770);
             table.setLockedWidth(true);
             table.getDefaultCell().setFixedHeight(20);
-            table.getDefaultCell().setBorder(Rectangle.BOTTOM);
-            table.addCell(footer);
+            table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+            table.addCell(new Phrase(footer, FOOTER_FONT));
             table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_RIGHT);
-            table.addCell(String.format("Page %d / ", writer.getPageNumber()));
+            table.addCell(new Phrase(String.format("Page %d sur ", writer.getPageNumber()), FOOTER_FONT));
             PdfPCell cell = new PdfPCell(Image.getInstance(total));
-            cell.setBorder(Rectangle.BOTTOM);
+            cell.setBorder(Rectangle.NO_BORDER);
             table.addCell(cell);
-            table.writeSelectedRows(0, -1, 34, 803, writer.getDirectContent());
+            table.writeSelectedRows(0, -1, document.left(), document.bottom(), writer.getDirectContent());
+            //document.add(table);
         } catch (DocumentException de) {
             throw new ExceptionConverter(de);
         }
@@ -67,8 +70,8 @@ public class FicheEventReportPageTemplate extends PdfPageEventHelper {
      */
     public void onCloseDocument(PdfWriter writer, Document document) {
         ColumnText.showTextAligned(total, Element.ALIGN_LEFT,
-                new Phrase(String.valueOf(writer.getPageNumber() - 1)),
-                2, 2, 0);
+                new Phrase(String.valueOf(writer.getPageNumber() - 1), FOOTER_FONT),
+                2, 5, 0);
     }
 }
 
