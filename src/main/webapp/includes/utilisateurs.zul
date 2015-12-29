@@ -10,7 +10,7 @@
             contentStyle="overflow:auto; padding: 0px 0px 0px 0px;">
 
         <menubar>
-            <menuitem label="Créer un utilisateur" onClick="@command('createUtilisateur')" visible="${sec:isAllGranted('ROLE_ADMINISTRATION')}"/>
+            <menuitem label="Créer un utilisateur" onClick="@command('createUtilisateur')" visible="${sec:isAnyGranted('ROLE_ADMINISTRATION,ROLE_CREATION_FICHE')}"/>
         </menubar>
 
         <grid model="@load(vmUtilisateurs.utilisateurs)" mold="paging" pageSize="20" style="margin: 10px">
