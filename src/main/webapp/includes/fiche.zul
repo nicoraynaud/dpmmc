@@ -285,6 +285,7 @@
                             <columns>
                                 <column hflex="4" label="Nature" align="left"/>
                                 <column hflex="2" label="Nombre" align="left"/>
+                                <column hflex="1" label="Video" align="center"/>
                                 <column hflex="1" label="Action" align="center"/>
                             </columns>
                             <template name="model" var="f">
@@ -303,6 +304,8 @@
                                     </combobox>
                                     <spinner hflex="1" inplace="true" value="@bind(f.nombre)" format=",###"
                                              disabled="@bind(not vmFiche.fiche.canEdit)" constraint="min 0,no empty: Champ requis"/>
+                                    <checkbox checked="@bind(f.video)"
+                                             disabled="@bind(not vmFiche.fiche.canEdit)" />
                                     <button label="" iconSclass="z-icon-minus"
                                             onClick="@command('removeFaitCommand', item=f)"
                                             disabled="@bind(not vmFiche.fiche.canEdit)"/>
