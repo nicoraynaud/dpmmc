@@ -59,7 +59,7 @@ public class GeolocService implements IGeolocService {
 
         // retrieve latest geoloc from view
         List<DonneeBrutGeoloc> data = geolocDao.getDonneesBrutSinceDate(maj.getDateDerniereMaj());
-        logger.info("Récupération de {} données brutes (VM_GEOLOC)", data.size());
+        logger.info("Récupération de {} données brutes (EXPORT_INTERVENTIONS)", data.size());
 
         // for each item, create a new GeolocalisationVP
         Date lastSyncedData = null;
