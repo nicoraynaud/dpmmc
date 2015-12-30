@@ -117,7 +117,7 @@ public class FicheEventReportHelper implements IFicheEventReportHelper {
         Resource r2 = appContex.getResource("/img/logo_police_nc.jpg");
         Image img2 = Image.getInstance(r2.getFile().getAbsolutePath());
         cell = new PdfPCell();
-        cell.addElement(new Chunk(img2, 85, 0));
+        cell.addElement(new Chunk(img2, 130, 0));
         cell.setFixedHeight(70);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -304,7 +304,7 @@ public class FicheEventReportHelper implements IFicheEventReportHelper {
                 } else {
                     sb.append("\n");
                 }
-                sb.append(pe.getCategorie().getLibelleLong() + " : " + pe.getNom());
+                sb.append(pe.getCategorie().getLibelleLong() + " : " + (StringUtils.isEmpty(pe.getNom()) ? "-" : pe.getNom()));
             }
             cell = new PdfPCell(new Phrase(sb.toString(), FONT_NORMAL));
             table.addCell(cell);
