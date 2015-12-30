@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "VM_GEOLOC")
+@Table(name = "EXPORT_INTERVENTIONS")
 @PersistenceUnit(unitName = "dpmmcGeolocPersistenceUnit")
 @NamedQuery(name = "getDonneesBrutesSinceDate", query = "from DonneeBrutGeoloc where action = 'N' and dateHeure > :date order by dateHeure desc")
 public class DonneeBrutGeoloc {
@@ -25,7 +25,7 @@ public class DonneeBrutGeoloc {
     @Column(name = "equipage")
     private String listeMatriculesAgents;
 
-    @Column(name = "idadrs")
+    @Column(name = "idadrs", columnDefinition = "char" ,length = 12)
     private String idAdresse;
 
     public Date getDateHeure() {
