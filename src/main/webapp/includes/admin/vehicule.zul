@@ -8,8 +8,8 @@
         <button label="Ajouter" iconSclass="z-icon-plus" style="margin-bottom: 5px;" onClick="@command('addItem')"/>
 
         <grid vflex="1" hflex="1" mold="paging" pageSize="10" width="100%"
-              model="@bind(vm.data)">
-            <columns>
+              model="@bind(vm.data)" sizedByContent="true" span="true">
+            <columns sizable="true">
                 <column label="Immatriculation" align="center" sort="auto(immatriculation)"/>
                 <column label="Description" align="center" sort="auto(type)"/>
                 <column label="Archivée" align="center" sort="auto(archivee)"/>

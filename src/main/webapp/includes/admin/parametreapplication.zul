@@ -7,11 +7,11 @@
              viewModel="@id('vm') @init('nc.noumea.mairie.dpmmc.viewModel.admin.ParametreApplicationViewModel')">
 
         <grid vflex="1" hflex="1" mold="paging" pageSize="10" width="100%"
-              model="@bind(vm.data)">
-            <columns>
-                <column label="Nom" align="center"/>
+              model="@bind(vm.data)" sizedByContent="true" span="true">
+            <columns sizable="true">
+                <column label="Nom" align="center" width="60"/>
                 <column label="Description" align="center"/>
-                <column label="Valeur" align="center"/>
+                <column label="Valeur" align="center" width="40"/>
             </columns>
             <template name="model">
                 <row>
