@@ -8,7 +8,7 @@
             viewModel="@id('vmUtilisateur') @init('nc.noumea.mairie.dpmmc.viewModel.UtilisateurPopupViewModel', utilisateur=arg['utilisateur'])"
             mode="modal" position="center,center" width="500px" height="285px" closable="true"
             title="Modifier un utilisateur" border="normal"
-            onCancel="win.detach()">
+            onCancel="self.detach()">
 
         <vbox vflex="1">
 

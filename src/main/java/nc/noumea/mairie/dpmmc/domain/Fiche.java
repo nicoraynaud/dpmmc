@@ -36,6 +36,9 @@ public class Fiche {
     @Column(name = "SITUATION_INITIALE")
     private String situationInitiale;
 
+    @Column(name = "SITUATION_INITIALE_TITRE")
+    private String situationInitialeTitre;
+
     @Column(name = "SUITE_DONNEE")
     private String suiteDonnee;
 
@@ -130,6 +133,14 @@ public class Fiche {
 
     public void setSituationInitiale(String situationInitiale) {
         this.situationInitiale = situationInitiale;
+    }
+
+    public String getSituationInitialeTitre() {
+        return situationInitialeTitre;
+    }
+
+    public void setSituationInitialeTitre(String situationInitialeTitre) {
+        this.situationInitialeTitre = situationInitialeTitre;
     }
 
     public String getSuiteDonnee() {

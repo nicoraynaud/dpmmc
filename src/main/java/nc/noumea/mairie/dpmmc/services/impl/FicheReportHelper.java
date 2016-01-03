@@ -20,7 +20,7 @@ import java.util.Date;
 @Service
 public class FicheReportHelper implements IFicheReportHelper {
 
-    private Logger logger = LoggerFactory.getLogger(GeolocService.class);
+    private Logger logger = LoggerFactory.getLogger(FicheReportHelper.class);
 
     private Font FONT_NORMAL = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
     private Font FONT_NORMAL_WHITE = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL, BaseColor.WHITE);

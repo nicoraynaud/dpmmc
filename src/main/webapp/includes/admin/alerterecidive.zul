@@ -8,8 +8,8 @@
         <button label="Ajouter" iconSclass="z-icon-plus" style="margin-bottom: 5px;" onClick="@command('addItem')"/>
 
         <grid vflex="1" hflex="1" mold="paging" pageSize="10" width="100%"
-              model="@bind(vm.data)">
-            <columns>
+              model="@bind(vm.data)" sizedByContent="true" span="true">
+            <columns sizable="true">
                 <column label="Nature de fait" align="center"/>
                 <column label="Délai entre 2 récidives" align="center"/>
                 <column label="Nb récidives levant alerte" align="center"/>

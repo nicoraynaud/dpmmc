@@ -13,8 +13,8 @@
             <menuitem label="Créer un utilisateur" onClick="@command('createUtilisateur')" visible="${sec:isAnyGranted('ROLE_ADMINISTRATION,ROLE_CREATION_FICHE')}"/>
         </menubar>
 
-        <grid model="@load(vmUtilisateurs.utilisateurs)" mold="paging" pageSize="20" style="margin: 10px">
-            <columns height="22px">
+        <grid model="@load(vmUtilisateurs.utilisateurs)" mold="paging" pageSize="20" style="margin: 10px" sizedByContent="true" span="true">
+            <columns height="22px" sizable="true">
                 <column label="Identifiant" />
                 <column label="Nom" />
                 <column label="Prénom" />

@@ -30,7 +30,7 @@
 
         <form-login login-page="/login.zul"
                     authentication-failure-url="/login.zul?login_error=1"
-                    default-target-url="/index.zul"
+                    default-target-url="/"
                     always-use-default-target="true"/>
 
         <logout logout-success-url="/login.zul" invalidate-session="true" />

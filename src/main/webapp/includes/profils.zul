@@ -14,7 +14,7 @@
             <menuitem label="Créer un profil" onClick="@command('createProfil')" visible="${sec:isAllGranted('ROLE_ADMINISTRATION')}"/>
         </menubar>
 
-        <grid model="@load(vmProfils.profils)" mold="paging" pageSize="20" style="margin: 10px">
+        <grid model="@load(vmProfils.profils)" mold="paging" pageSize="20" style="margin: 10px" sizedByContent="true" span="true">
             <columns height="22px">
                 <column label="Nom" />
                 <column label="ADMINISTRATION" align="center" />

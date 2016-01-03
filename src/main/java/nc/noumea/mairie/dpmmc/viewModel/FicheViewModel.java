@@ -344,6 +344,9 @@ public class FicheViewModel {
         if (StringUtils.isEmpty(fiche.getFiche().getGdhAppel()))
             formErrors.put("gdhAppel", "GDH Appel est obligatoire.");
 
+        if (StringUtils.isEmpty(fiche.getFiche().getSituationInitialeTitre()))
+            formErrors.put("situationInitialeTitre", "Le titre de situation initiale est requis.");
+
         if (fiche.getFiche().getPatrouilles().isEmpty())
             formErrors.put("equipages", "Au moins un équipage doit être renseigné.");
 

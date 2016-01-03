@@ -8,15 +8,15 @@
         <button label="Ajouter" iconSclass="z-icon-plus" style="margin-bottom: 5px;" onClick="@command('addItem')"/>
 
         <grid vflex="1" hflex="1" mold="paging" pageSize="10" width="100%"
-              model="@bind(vm.data)">
-            <columns>
-                <column label="Libellé court" align="center" sort="auto(libelleCourt)"/>
+              model="@bind(vm.data)" sizedByContent="true" span="true">
+            <columns sizable="true">
+                <column label="Libellé court" align="center" sort="auto(libelleCourt)" width="60"/>
                 <column label="Libellé long" align="center" sort="auto(libelleLong)"/>
-                <column label="Catégorie" align="center"/>
-                <column label="Archivée" align="center" sort="auto(archivee)"/>
-                <column label="Par défaut" align="center" sort="auto(parDefaut)"/>
-                <column label="Ordre" align="center" sort="auto(ordre)"/>
-                <column label="Statistiques" align="center" sort="auto(statistiques)"/>
+                <column label="Catégorie" align="center" width="60"/>
+                <column label="Archivée" align="center" sort="auto(archivee)" width="40"/>
+                <column label="Par défaut" align="center" sort="auto(parDefaut)" width="40"/>
+                <column label="Ordre" align="center" sort="auto(ordre)" width="40"/>
+                <column label="Statistiques" align="center" sort="auto(statistiques)" width="40"/>
             </columns>
             <template name="model">
                 <row>

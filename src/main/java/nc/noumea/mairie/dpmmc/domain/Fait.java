@@ -22,6 +22,9 @@ public class Fait {
     @JoinColumn(name="ID_FICHE")
     private Fiche fiche;
 
+    @Column(name="VIDEO")
+    private boolean video;
+
     public Long getId() {
         return id;
     }
@@ -52,5 +55,13 @@ public class Fait {
 
     public void setFiche(Fiche fiche) {
         this.fiche = fiche;
+    }
+
+    public boolean isVideo() {
+        return video;
+    }
+
+    public void setVideo(boolean video) {
+        this.video = video;
     }
 }

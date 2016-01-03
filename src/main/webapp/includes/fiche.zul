@@ -223,6 +223,15 @@
                             </combobox>
                         </row>
                         <row>
+                            <label value="Titre : " style="margin-left: 10px;" tooltip="situationInitialeTitreP"
+                                   sclass="@bind(vmFiche.formErrors.containsKey('situationInitialeTitre') ? 'labelError':'')"/>
+                            <cell colspan="3">
+                                <textbox hflex="1" constraint="no empty: Champ requis" maxlength="100"
+                                         value="@bind(vmFiche.fiche.fiche.situationInitialeTitre)"
+                                         disabled="@bind(not vmFiche.fiche.canEdit)"/>
+                            </cell>
+                        </row>
+                        <row>
                             <label value="Situation initiale : " style="margin-left: 10px;"/>
                             <cell colspan="3">
                                 <textbox hflex="1" multiline="true" rows="4"
@@ -276,6 +285,7 @@
                             <columns>
                                 <column hflex="4" label="Nature" align="left"/>
                                 <column hflex="2" label="Nombre" align="left"/>
+                                <column hflex="1" label="Video" align="center"/>
                                 <column hflex="1" label="Action" align="center"/>
                             </columns>
                             <template name="model" var="f">
@@ -294,6 +304,8 @@
                                     </combobox>
                                     <spinner hflex="1" inplace="true" value="@bind(f.nombre)" format=",###"
                                              disabled="@bind(not vmFiche.fiche.canEdit)" constraint="min 0,no empty: Champ requis"/>
+                                    <checkbox checked="@bind(f.video)"
+                                             disabled="@bind(not vmFiche.fiche.canEdit)" />
                                     <button label="" iconSclass="z-icon-minus"
                                             onClick="@command('removeFaitCommand', item=f)"
                                             disabled="@bind(not vmFiche.fiche.canEdit)"/>
@@ -389,6 +401,10 @@
             <popup id="gdhAppelP"
                    sclass="@bind(vmFiche.formErrors.containsKey('gdhAppel') ? 'popupVisible' : 'popupHidden')">
                 <label value="@bind(vmFiche.formErrors['gdhAppel'])" sclass="labelError"/>
+            </popup>
+            <popup id="situationInitialeTitreP"
+                   sclass="@bind(vmFiche.formErrors.containsKey('situationInitialeTitre') ? 'popupVisible' : 'popupHidden')">
+                <label value="@bind(vmFiche.formErrors['situationInitialeTitre'])" sclass="labelError"/>
             </popup>
             <popup id="categorieSaisineP"
                    sclass="@bind(vmFiche.formErrors.containsKey('categorieSaisine') ? 'popupVisible' : 'popupHidden')">
