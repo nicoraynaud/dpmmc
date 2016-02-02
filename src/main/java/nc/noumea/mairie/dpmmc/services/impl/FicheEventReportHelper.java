@@ -318,7 +318,7 @@ public class FicheEventReportHelper implements IFicheEventReportHelper {
                 } else {
                     sb.append("\n");
                 }
-                sb.append(pr.getNumero());
+                sb.append(pr.getCategorie().getLibelleCourt() + " - " + pr.getNumero());
             }
             cell = new PdfPCell(new Phrase(sb.toString(), FONT_NORMAL));
             table.addCell(cell);
